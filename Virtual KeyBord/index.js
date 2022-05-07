@@ -525,8 +525,8 @@ const arrBtn = [
     {
         keyShiftEN: '',
         keyShiftRu: '',
-        keyEng: "",
-        keyRu: "",
+        keyEng: " ",
+        keyRu: " ",
         charCode: 0,
         keyCode: 32,
         code: 'Space',
@@ -582,16 +582,21 @@ const arrBtn = [
 class Regen {
     constructor(nameElement) {
         this.nameElement = nameElement
-        
     }
     createElemBody(parent, classEl) {
         const div = document.createElement(this.nameElement)
+
+        if (this.nameElement === "textarea") {
+            div.setAttribute("id", "textarea")
+            div.setAttribute("autofocus", "autofocus")
+        }
         div.className = classEl;
         parent.append(div);
         return this
     }
     creatText(parent, classEl, text) {
         const str = document.createElement(this.nameElement)
+
         str.className = classEl;
         str.innerHTML = text;
         parent.prepend(str)
@@ -600,7 +605,10 @@ class Regen {
         for (let i = 0; i < 64; i++) {
             const btn = document.createElement(this.nameElement)
             const p = document.createElement("p")
+
             btn.className = classEl;
+            btn.setAttribute("id", arrBtn[i].keyCode)
+            btn.onclick = inputValue
             p.className = "btnName"
             p.innerHTML = arrBtn[i].keyEng
             parent.append(btn)
@@ -621,6 +629,7 @@ const regen = new Regen("div")
 const textarea = new Regen("textarea")
 const h1 = new Regen("h1")
 const p = new Regen("p")
+const but = new Regen("button")
 
 
 regen.createElemBody(document.body, "wrapper")
@@ -630,12 +639,47 @@ regen.createElemBody(document.body.childNodes[2].lastChild, "wrapper_monitor")
 textarea.createElemBody(document.body.childNodes[2].lastChild.firstChild, "monitor")
 regen.createElemBody(document.body.childNodes[2].lastChild, "wrapper_keyboard")
 regen.createElemBody(document.body.childNodes[2].lastChild.lastChild, "line")
-regen.createButton(document.body.childNodes[2].lastChild.lastChild.firstChild, "button")
+but.createButton(document.body.childNodes[2].lastChild.lastChild.firstChild, "button")
 
+function inputValue() {
+    let res = this.id
+    console.log(res)
+    arrBtn.forEach(item => {
+        let result = ""
+        if (res == item.keyCode) {
+           if (item.keyCode == 8) {
+                return false
+           } else if (item.keyCode == 9) {
+                return false
+           } else if (item.keyCode == 13) {
+            return false
+           } else if (item.keyCode == 16) {
+               return false
+           } else if (item.keyCode == 17) {
+            return false
+           } else if (item.keyCode == 18) {
+            return false
+           } else if (item.keyCode == 20) {
+            return false
+           } else if (item.keyCode == 220) {
+            return false
+           } else if (item.keyCode == 255) {
+            return false
+           } else {
+            result = `${result}` + `${item.keyEng}`
+            document.getElementById("textarea").value += `${result}`
+           }
 
+        }
+    })
 
-document.addEventListener("keydown", function(KeyboardEvent) {
-    console.log(KeyboardEvent)
-})
+}
+// document.addEventListener("keydown", function(KeyboardEvent) {
+//     arrBtn.forEach(item => {
+//         if (KeyboardEvent.keyCode ===  )
+//     })
+//     console.log(KeyboardEvent)
+// })
+
 
 

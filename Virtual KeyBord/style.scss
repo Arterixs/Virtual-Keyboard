@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+body {
+    background: #aabab5eb;
+}
+
 .wrapper {
     margin: 0 auto;
     display: flex;
@@ -73,9 +77,12 @@
             align-items: center;
             padding: 10px;
             cursor: pointer;
-            background: #c4d7def0;
+            background: #cccccc;
             border-radius: 5px;
             box-shadow: 2px 2px 2px 1px #000;
+            &:hover {
+                background:#c5c9e021;
+            }
         }
         .backspace {
             width: 100px;
