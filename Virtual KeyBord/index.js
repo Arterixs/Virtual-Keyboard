@@ -613,14 +613,14 @@ class Regen {
             p.innerHTML = arrBtn[i].keyEng
             parent.append(btn)
             btn.append(p)
-            i === 13 ?  btn.className = classEl + " backspace" : 0
-            i === 14 ?  btn.className = classEl + " tab" : 0
-            i === 28 ?  btn.className = classEl + " delete" : 0
+            i === 13 ?  (btn.className = classEl + " backspace" , btn.onclick = logicBack) : 0
+            i === 14 ?  (btn.className = classEl + " tab" , btn.onclick = logicTab) : 0 
+            i === 28 ?  (btn.className = classEl + " delete" , btn.onclick = logicDelete) : 0
             i === 29 ?  btn.className = classEl + " capsLock" : 0
-            i === 41 ?  btn.className = classEl + " enter" : 0
+            i === 41 ?  (btn.className = classEl + " enter" , btn.onclick = logicEnter) : 0
             i === 42 ?  btn.className = classEl + " shift" : 0
             i === 54 ?  btn.className = classEl + " shift" : 0
-            i === 58 ?  btn.className = classEl + " space" : 0
+            i === 58 ?  (btn.className = classEl + " space" , btn.onclick = logicSpace) : 0
         }
     }
 }
@@ -641,15 +641,114 @@ regen.createElemBody(document.body.childNodes[2].lastChild, "wrapper_keyboard")
 regen.createElemBody(document.body.childNodes[2].lastChild.lastChild, "line")
 but.createButton(document.body.childNodes[2].lastChild.lastChild.firstChild, "button")
 
+
+function logicBack() {
+     let valueText = document.getElementById("textarea").value
+     let idText = document.getElementById("textarea")
+    if (idText.selectionStart !== idText.selectionEnd) {
+        let range = valueText.slice(idText.selectionStart, idText.selectionEnd)
+        let sub = valueText.indexOf(range, idText.selectionStart)
+        document.getElementById("textarea").value = valueText.substring(0, sub) + valueText.substring(sub + range.length)
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = sub
+        
+    } else {
+        let positionCursor = valueText.slice(idText.selectionStart - 1, idText.selectionEnd)
+        console.log(positionCursor)
+        let pub = valueText.indexOf(positionCursor, idText.selectionStart - 1)
+        console.log(pub)
+        if (idText.selectionStart == 0) {
+            idText.focus()
+            idText.selectionStart = idText.selectionEnd = pub
+        } else {
+            document.getElementById("textarea").value = valueText.substring(0, pub) + valueText.substring(pub + 1);
+            idText.focus()
+            idText.selectionStart = idText.selectionEnd = pub
+        }          
+    }
+}
+
+function logicDelete() {
+    let valueText = document.getElementById("textarea").value
+    let idText = document.getElementById("textarea")
+    if (idText.selectionStart !== idText.selectionEnd) {
+        let range = valueText.slice(idText.selectionStart, idText.selectionEnd)
+        let sub = valueText.indexOf(range, idText.selectionStart - 2)
+        document.getElementById("textarea").value = valueText.substring(0, sub) + valueText.substring(sub + range.length)
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = sub
+        
+    } else {
+        let positionCursor = valueText.slice(idText.selectionStart, idText.selectionEnd + 1)
+        let pub = valueText.indexOf(positionCursor, idText.selectionEnd)
+        document.getElementById("textarea").value = valueText.substring(0, pub) + valueText.substring(pub + 1);
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = pub        
+    }
+}
+
+function logicSpace() {
+    let valueText = document.getElementById("textarea").value
+    let idText = document.getElementById("textarea")
+    if (idText.selectionStart !== idText.selectionEnd) {
+        let range = valueText.slice(idText.selectionStart, idText.selectionEnd)
+        let sub = valueText.indexOf(range, idText.selectionStart - 2)
+        document.getElementById("textarea").value = valueText.substring(0, sub) + " " + valueText.substring(sub + range.length)
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = sub + 1
+        
+    } else {
+        let positionCursor = valueText.slice(idText.selectionStart, idText.selectionEnd + 1)
+        let pub = valueText.indexOf(positionCursor, idText.selectionStart)
+        document.getElementById("textarea").value = valueText.substring(0, pub) + " " + valueText.substring(pub);
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = pub + 1        
+    }
+
+}
+
+function logicTab() {
+    event.preventDefault();
+    let valueText = document.getElementById("textarea").value
+    let idText = document.getElementById("textarea")
+    if (idText.selectionStart !== idText.selectionEnd) {
+        let range = valueText.slice(idText.selectionStart, idText.selectionEnd)
+        let sub = valueText.indexOf(range, idText.selectionStart - 2)
+        document.getElementById("textarea").value = valueText.substring(0, sub) + "    " + valueText.substring(sub + range.length)
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = sub + 4
+        
+    } else {
+        let positionCursor = valueText.slice(idText.selectionStart, idText.selectionEnd + 1)
+        let pub = valueText.indexOf(positionCursor, idText.selectionStart)
+        document.getElementById("textarea").value = valueText.substring(0, pub) + "    " + valueText.substring(pub);
+        idText.focus()
+        idText.selectionStart = idText.selectionEnd = pub + 4        
+    }
+}
+
+function logicEnter() {
+    event.preventDefault();
+    let valueText = document.getElementById("textarea").value
+    let idText = document.getElementById("textarea")
+    let positionCursor = valueText.slice(idText.selectionStart, idText.selectionEnd)
+    let pub = valueText.indexOf(positionCursor, idText.selectionStart)
+    let position = valueText.slice(0, pub)
+    document.getElementById("textarea").value = valueText.substring(0, pub) + "\n"+ valueText.substring(pub);
+    idText.focus()
+    idText.selectionStart = idText.selectionEnd = position.length + 1 
+    
+}
+
 function inputValue() {
     let res = this.id
+    let valueText = document.getElementById("textarea").value
+    let idText = document.getElementById("textarea")
     console.log(res)
     arrBtn.forEach(item => {
         let result = ""
         if (res == item.keyCode) {
-           if (item.keyCode == 8) {
-                return false
-           } else if (item.keyCode == 9) {
+             if (item.keyCode == 9) {
                 return false
            } else if (item.keyCode == 13) {
             return false
@@ -661,15 +760,12 @@ function inputValue() {
             return false
            } else if (item.keyCode == 20) {
             return false
-           } else if (item.keyCode == 220) {
-            return false
            } else if (item.keyCode == 255) {
             return false
            } else {
             result = `${result}` + `${item.keyEng}`
             document.getElementById("textarea").value += `${result}`
            }
-
         }
     })
 
