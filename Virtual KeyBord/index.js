@@ -1,7 +1,7 @@
 
 const arrBtn = [
     {   
-        keyShiftEn: '~',
+        keyShiftEN: '~',
         keyShiftRu: "Ё",
         keyEng: "`",
         keyRu: "ё",
@@ -10,7 +10,7 @@ const arrBtn = [
         code: "Backquote",
     },
     {
-        keyShiftEn: '!',
+        keyShiftEN: '!',
         keyShiftRu: "!",
         keyEng: "1",
         keyRu: "1",
@@ -118,8 +118,8 @@ const arrBtn = [
         code: "Equal",
     },
     {
-        keyShiftEN: "+",
-        keyShiftRu: '+',
+        keyShiftEN: "Backspace",
+        keyShiftRu: 'Backspace',
         keyEng: "Backspace",
         keyRu: "Backspace",
         charCode: 0,
@@ -127,8 +127,8 @@ const arrBtn = [
         code: "Backspace",
     },
     {
-        keyShiftEN: "",
-        keyShiftRu: '',
+        keyShiftEN: "Tab",
+        keyShiftRu: 'Tab',
         keyEng: "Tab",
         keyRu: "Tab",
         charCode: 0,
@@ -253,8 +253,8 @@ const arrBtn = [
         code: "Backslash",
     },
     {
-        keyShiftEN: "",
-        keyShiftRu: '',
+        keyShiftEN: "Del",
+        keyShiftRu: 'Del',
         keyEng: "Del",
         keyRu: "Del",
         charCode: 0,
@@ -262,8 +262,8 @@ const arrBtn = [
         code: 'Delete',
     },
     {
-        keyShiftEN: "",
-        keyShiftRu: '',
+        keyShiftEN: "CapsLock",
+        keyShiftRu: 'CapsLock',
         keyEng: "CapsLock",
         keyRu: "CapsLock",
         charCode: 0,
@@ -370,8 +370,8 @@ const arrBtn = [
         code: 'Quote',
     },
     {
-        keyShiftEN: '',
-        keyShiftRu: '',
+        keyShiftEN: 'Enter',
+        keyShiftRu: 'Enter',
         keyEng: "Enter",
         keyRu: "Enter",
         charCode: 0,
@@ -478,10 +478,10 @@ const arrBtn = [
         code: 'Slash',
     },
     {
-        keyShiftEN: 'up',
-        keyShiftRu: 'up',
-        keyEng: "up",
-        keyRu: "up",
+        keyShiftEN: '⇧',
+        keyShiftRu: '⇧',
+        keyEng: "⇧",
+        keyRu: "⇧",
         charCode: 0,
         keyCode: 38,
         code: 'ArrowUp',
@@ -541,28 +541,28 @@ const arrBtn = [
         code: 'AltRight',
     },
     {
-        keyShiftEN: 'left',
-        keyShiftRu: 'left',
-        keyEng: "left",
-        keyRu: "left",
+        keyShiftEN: '⇦',
+        keyShiftRu: '⇦',
+        keyEng: "⇦",
+        keyRu: "⇦",
         charCode: 0,
         keyCode: 37,
         code: 'ArrowLeft',
     },
     {
-        keyShiftEN: 'down',
-        keyShiftRu: 'down',
-        keyEng: "down",
-        keyRu: "down",
+        keyShiftEN: '⇩',
+        keyShiftRu: '⇩' ,
+        keyEng: "⇩",
+        keyRu: "⇩",
         charCode: 0,
         keyCode: 40,
         code: 'ArrowDown',
     },
     {
-        keyShiftEN: 'right',
-        keyShiftRu: 'right',
-        keyEng: "right",
-        keyRu: "right",
+        keyShiftEN: '⇨',
+        keyShiftRu: '⇨',
+        keyEng: "⇨",
+        keyRu: "⇨",
         charCode: 0,
         keyCode: 39,
         code: 'ArrowRight',
@@ -610,17 +610,19 @@ class Regen {
             btn.setAttribute("id", arrBtn[i].keyCode)
             btn.onclick = inputValue
             p.className = "btnName"
+            p.setAttribute("id", arrBtn[i].code)
             p.innerHTML = arrBtn[i].keyEng
             parent.append(btn)
             btn.append(p)
             i === 13 ?  (btn.className = classEl + " backspace" , btn.onclick = logicBack) : 0
             i === 14 ?  (btn.className = classEl + " tab" , btn.onclick = logicTab) : 0 
             i === 28 ?  (btn.className = classEl + " delete" , btn.onclick = logicDelete) : 0
-            i === 29 ?  btn.className = classEl + " capsLock" : 0
+            i === 29 ?  (btn.className = classEl + " capsLock" , btn.onclick = logicCaps) : 0
             i === 41 ?  (btn.className = classEl + " enter" , btn.onclick = logicEnter) : 0
-            i === 42 ?  btn.className = classEl + " shift" : 0
-            i === 54 ?  btn.className = classEl + " shift" : 0
+            i === 42 ?  (btn.className = classEl + " shift", btn.onmousedown = logicShift, p.onmouseup = shiftMouseUp) : 0
+            i === 54 ?  (btn.className = classEl + " shift" , btn.onmousedown = logicShift, p.onmouseup = shiftMouseUp) : 0
             i === 58 ?  (btn.className = classEl + " space" , btn.onclick = logicSpace) : 0
+            i == 62 || i == 61 || i == 60 || i == 53 ? p.className = "btnName arrow" : 0
         }
     }
 }
@@ -711,20 +713,13 @@ function logicTab() {
     event.preventDefault();
     let valueText = document.getElementById("textarea").value
     let idText = document.getElementById("textarea")
-    if (idText.selectionStart !== idText.selectionEnd) {
-        let range = valueText.slice(idText.selectionStart, idText.selectionEnd)
-        let sub = valueText.indexOf(range, idText.selectionStart - 2)
-        document.getElementById("textarea").value = valueText.substring(0, sub) + "    " + valueText.substring(sub + range.length)
-        idText.focus()
-        idText.selectionStart = idText.selectionEnd = sub + 4
-        
-    } else {
-        let positionCursor = valueText.slice(idText.selectionStart, idText.selectionEnd + 1)
-        let pub = valueText.indexOf(positionCursor, idText.selectionStart)
-        document.getElementById("textarea").value = valueText.substring(0, pub) + "    " + valueText.substring(pub);
-        idText.focus()
-        idText.selectionStart = idText.selectionEnd = pub + 4        
-    }
+    let positionCursor = valueText.slice(idText.selectionStart, idText.selectionEnd + 1)
+    let pos = valueText.indexOf(positionCursor, idText.selectionStart)
+
+    document.getElementById("textarea").value = valueText.substring(0, pos) + "\t" + valueText.substring(pos);
+    idText.focus()
+    idText.selectionStart = idText.selectionEnd = pos + 1        
+    
 }
 
 function logicEnter() {
@@ -740,11 +735,45 @@ function logicEnter() {
     
 }
 
+
+function logicShift() {
+    arrBtn.forEach(item => {
+        let valueBut = document.getElementById(`${item.code}`)
+        valueBut.textContent = item.keyShiftEN
+        })
+}
+
+function shiftMouseUp()   {
+    arrBtn.forEach(item => {
+        let valueBut = document.getElementById(`${item.code}`)
+        valueBut.textContent = item.keyEng
+    })
+}
+
+let caps = false
+function logicCaps() {
+    if (caps == false) {
+        arrBtn.forEach((item, index) => {
+            if (item.code == "Key" + `${item.keyShiftEN}` ) {
+                let valueBut = document.getElementById(`${item.code}`)
+                valueBut.textContent = item.keyShiftEN
+            }
+        })
+    return caps = true
+    } else {
+        arrBtn.forEach(item => {
+            let valueBut = document.getElementById(`${item.code}`)
+            valueBut.textContent = item.keyEng
+        })
+    return caps = false
+    }
+}
+
+
 function inputValue() {
     let res = this.id
-    let valueText = document.getElementById("textarea").value
-    let idText = document.getElementById("textarea")
-    console.log(res)
+    console.log(res.textContent)
+     let idText = document.getElementById("textarea")
     arrBtn.forEach(item => {
         let result = ""
         if (res == item.keyCode) {
@@ -764,18 +793,22 @@ function inputValue() {
             return false
            } else {
             result = `${result}` + `${item.keyEng}`
-            document.getElementById("textarea").value += `${result}`
+            document.getElementById("textarea").value += document.getElementById(`${item.code}`).textContent
+            idText.focus()
            }
         }
     })
-
 }
+
+ 
+
+
+
+
+
 // document.addEventListener("keydown", function(KeyboardEvent) {
 //     arrBtn.forEach(item => {
 //         if (KeyboardEvent.keyCode ===  )
 //     })
 //     console.log(KeyboardEvent)
 // })
-
-
-
