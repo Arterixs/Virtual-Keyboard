@@ -82,8 +82,18 @@ body {
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px #000;
 }
+.wrapper_keyboard .line .button.active {
+  background-color: #c5c9e021;
+  box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
+  transition: all 0.2s linear 0s;
+}
 .wrapper_keyboard .line .button:hover {
   background: #c5c9e021;
+}
+.wrapper_keyboard .line .button:active {
+  background-color: #c5c9e021;
+  box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
+  transition: all 0.2s linear 0s;
 }
 .wrapper_keyboard .line .backspace {
   width: 100px;

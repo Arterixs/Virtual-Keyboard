@@ -258,7 +258,7 @@ const arrBtn = [
         keyEng: "Del",
         keyRu: "Del",
         charCode: 0,
-        keyCode: 220,
+        keyCode: 46,
         code: 'Delete',
     },
     {
@@ -607,21 +607,21 @@ class Regen {
             const p = document.createElement("p")
 
             btn.className = classEl;
-            btn.setAttribute("id", arrBtn[i].keyCode)
+            btn.setAttribute("id", arrBtn[i].code)
             btn.onclick = inputValue
             p.className = "btnName"
-            p.setAttribute("id", arrBtn[i].code)
+            p.setAttribute("id", arrBtn[i].keyCode)
             p.innerHTML = arrBtn[i].keyEng
             parent.append(btn)
             btn.append(p)
-            i === 13 ?  (btn.className = classEl + " backspace" , btn.onclick = logicBack) : 0
-            i === 14 ?  (btn.className = classEl + " tab" , btn.onclick = logicTab) : 0 
-            i === 28 ?  (btn.className = classEl + " delete" , btn.onclick = logicDelete) : 0
-            i === 29 ?  (btn.className = classEl + " capsLock" , btn.onclick = logicCaps) : 0
-            i === 41 ?  (btn.className = classEl + " enter" , btn.onclick = logicEnter) : 0
-            i === 42 ?  (btn.className = classEl + " shift", btn.onmousedown = logicShift, p.onmouseup = shiftMouseUp) : 0
-            i === 54 ?  (btn.className = classEl + " shift" , btn.onmousedown = logicShift, p.onmouseup = shiftMouseUp) : 0
-            i === 58 ?  (btn.className = classEl + " space" , btn.onclick = logicSpace) : 0
+            i === 13 ? (btn.className = classEl + " backspace" , btn.onclick = logicBack) : 0
+            i === 14 ? (btn.className = classEl + " tab" , btn.onclick = logicTab) : 0 
+            i === 28 ? (btn.className = classEl + " delete" , btn.onclick = logicDelete) : 0
+            i === 29 ? (btn.className = classEl + " capsLock" , btn.onclick = logicCaps) : 0
+            i === 41 ? (btn.className = classEl + " enter" , btn.onclick = logicEnter) : 0
+            i === 42 ? (btn.className = classEl + " shift", btn.onmousedown = logicShift, p.onmouseup = shiftMouseUp) : 0
+            i === 54 ? (btn.className = classEl + " shift" , btn.onmousedown = logicShift, p.onmouseup = shiftMouseUp) : 0
+            i === 58 ? (btn.className = classEl + " space" , btn.onclick = logicSpace) : 0
             i == 62 || i == 61 || i == 60 || i == 53 ? p.className = "btnName arrow" : 0
         }
     }
@@ -738,31 +738,33 @@ function logicEnter() {
 
 function logicShift() {
     arrBtn.forEach(item => {
-        let valueBut = document.getElementById(`${item.code}`)
-        valueBut.textContent = item.keyShiftEN
+        let valueBut = document.getElementById(`${item.keyCode}`)
+        return valueBut.textContent = item.keyShiftEN
         })
 }
 
-function shiftMouseUp()   {
+function shiftMouseUp() {
     arrBtn.forEach(item => {
-        let valueBut = document.getElementById(`${item.code}`)
-        valueBut.textContent = item.keyEng
+        let valueBut = document.getElementById(`${item.keyCode}`)
+        return valueBut.textContent = item.keyEng
     })
 }
+
+
 
 let caps = false
 function logicCaps() {
     if (caps == false) {
-        arrBtn.forEach((item, index) => {
+        arrBtn.forEach((item) => {
             if (item.code == "Key" + `${item.keyShiftEN}` ) {
-                let valueBut = document.getElementById(`${item.code}`)
+                let valueBut = document.getElementById(`${item.keyCode}`)
                 valueBut.textContent = item.keyShiftEN
             }
         })
     return caps = true
     } else {
         arrBtn.forEach(item => {
-            let valueBut = document.getElementById(`${item.code}`)
+            let valueBut = document.getElementById(`${item.keyCode}`)
             valueBut.textContent = item.keyEng
         })
     return caps = false
@@ -772,43 +774,54 @@ function logicCaps() {
 
 function inputValue() {
     let res = this.id
-    console.log(res.textContent)
-     let idText = document.getElementById("textarea")
+    let idText = document.getElementById("textarea")
     arrBtn.forEach(item => {
         let result = ""
-        if (res == item.keyCode) {
-             if (item.keyCode == 9) {
-                return false
-           } else if (item.keyCode == 13) {
-            return false
-           } else if (item.keyCode == 16) {
-               return false
-           } else if (item.keyCode == 17) {
-            return false
-           } else if (item.keyCode == 18) {
-            return false
-           } else if (item.keyCode == 20) {
-            return false
-           } else if (item.keyCode == 255) {
-            return false
-           } else {
+        if (res == item.code && res !== "ShiftLeft" && res !== "ShiftRight" && res !== "ControlLeft" && res !== "ControlRight" && res !== "AltLeft" && res !== "AltRight" && res !== "WakeUp") {
             result = `${result}` + `${item.keyEng}`
             document.getElementById("textarea").value += document.getElementById(`${item.code}`).textContent
             idText.focus()
+           } else {
+            idText.focus()
            }
-        }
     })
 }
 
  
 
+let idText = document.getElementById("textarea")
+idText.focus()
 
 
+document.addEventListener("keydown", function(KeyboardEvent) {
+    if (KeyboardEvent.keyCode == 9) {
+        logicTab()
+        event.preventDefault()
+    }
+    if (KeyboardEvent.keyCode == 20) {
+        logicCaps()
+    }
+    if (KeyboardEvent.keyCode == 16) {
+        logicShift()
+    }
+    if (KeyboardEvent.keyCode == 39 || KeyboardEvent.keyCode == 40 || KeyboardEvent.keyCode == 37 || KeyboardEvent.keyCode == 38 ) {
+        event.preventDefault()
+    }
+    arrBtn.forEach(item => {
+        if (KeyboardEvent.code === item.code) {
+            document.getElementById(`${item.code}`).classList.add("active")
+        }
+    })
+    idText.focus()
+})
 
-
-// document.addEventListener("keydown", function(KeyboardEvent) {
-//     arrBtn.forEach(item => {
-//         if (KeyboardEvent.keyCode ===  )
-//     })
-//     console.log(KeyboardEvent)
-// })
+document.addEventListener("keyup", function(KeyboardEvent) {
+    arrBtn.forEach(item => {
+        if (KeyboardEvent.code === item.code) {
+            document.getElementById(`${item.code}`).classList.remove("active")
+        }
+    })
+    if (KeyboardEvent.keyCode == 16) {
+        shiftMouseUp()
+    }
+})
