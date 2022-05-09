@@ -698,7 +698,7 @@ const h1 = new Regen('h1');
 const but = new Regen('button');
 
 regen.createElemBody(document.body, 'wrapper');
-h1.creatText(document.body.childNodes[2], 'title_key', 'Virtual Keyboard');
+h1.creatText(document.body.childNodes[2], 'title_key', 'Для переключения языка используется комбинация: левыe shift + alt');
 regen.createElemBody(document.body.childNodes[2], 'container');
 regen.createElemBody(document.body.childNodes[2].lastChild, 'wrapper_monitor');
 textarea.createElemBody(document.body.childNodes[2].lastChild.firstChild, 'monitor');
