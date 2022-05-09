@@ -1,0 +1,26 @@
+{
+    "env" : {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["airbnb/base"],
+    "rules": {
+        "no-restricted-globals": ["error", "event", "fdescribe"],
+        "semi": "off",
+        "no-console": "off",
+        "no-plusplus": "off",
+        "eol-last": "off",
+        "no-multi-assign": ["error", { "ignoreNonDeclaration": true }],
+        "max-len": ["error", 250],
+        "no-use-before-define": [2, {"functions": false, "classes": true}],
+        "no-unused-expressions": [2, { "allowTernary": true, "allowShortCircuit": true }],
+        "no-return-assign": ["error", "always"],
+        "no-alert": "off",
+        "prefer-destructuring": "off",
+        "no-paran-reassing": "off"
+     
+
+        
+    }
+}
