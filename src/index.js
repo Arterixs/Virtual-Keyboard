@@ -994,8 +994,8 @@ const layoutBtn = (...btnKeys) => {
   const pressed = new Set();
   document.addEventListener("keydown", (KeyboardEvent) => {
     pressed.add(KeyboardEvent.code);
-    for (let key of btnKeys) {
-      if (!pressed.has(key)) {
+    for (let i = 0; i < btnKeys.length; i += 1) {
+      if (!pressed.has(btnKeys[i])) {
         return;
       }
     }
@@ -1011,7 +1011,7 @@ const layoutBtn = (...btnKeys) => {
 
 layoutBtn("ShiftLeft", "AltLeft");
 
-let layoutEn = () => {
+function layoutEn() {
   if (localStorage.getItem("language") === "en") {
     arrBtn.forEach((item) => {
       const valueBut = document.getElementById(`${item.keyCode}`);
@@ -1024,7 +1024,7 @@ let layoutEn = () => {
     valueBut.textContent = item.keyEng;
   });
   return localStorage.setItem("language", "en");
-};
+}
 
 window.addEventListener("beforeunload", (layoutEn(), logicCaps()));
 window.addEventListener("load", (layoutEn(), logicCaps()));
