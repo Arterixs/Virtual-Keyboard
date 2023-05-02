@@ -667,7 +667,7 @@ class Regen {
   }
 
   createButton(parent, classEl) {
-    for (let i = 0; i < 64; i++) {
+    for (let i = 0; i < 64; i += 1) {
       const btn = document.createElement(this.nameElement);
       const p = document.createElement("p");
 
@@ -749,7 +749,8 @@ function logicBack() {
     document.getElementById("textarea").value =
       valueText.substring(0, sub) + valueText.substring(sub + range.length);
     idText.focus();
-    idText.selectionStart = idText.selectionEnd = sub;
+    idText.selectionStart = sub;
+    idText.selectionEnd = sub;
   } else {
     const positionCursor = valueText.slice(
       idText.selectionStart - 1,
@@ -758,12 +759,14 @@ function logicBack() {
     const pub = valueText.indexOf(positionCursor, idText.selectionStart - 1);
     if (idText.selectionStart === 0) {
       idText.focus();
-      idText.selectionStart = idText.selectionEnd = pub;
+      idText.selectionStart = pub;
+      idText.selectionEnd = pub;
     } else {
       document.getElementById("textarea").value =
         valueText.substring(0, pub) + valueText.substring(pub + 1);
       idText.focus();
-      idText.selectionStart = idText.selectionEnd = pub;
+      idText.selectionStart = pub;
+      idText.selectionEnd = pub;
     }
   }
 }
@@ -777,7 +780,8 @@ function logicDelete() {
     document.getElementById("textarea").value =
       valueText.substring(0, sub) + valueText.substring(sub + range.length);
     idText.focus();
-    idText.selectionStart = idText.selectionEnd = sub;
+    idText.selectionStart = sub;
+    idText.selectionEnd = sub;
   } else {
     const positionCursor = valueText.slice(
       idText.selectionStart,
@@ -787,7 +791,8 @@ function logicDelete() {
     document.getElementById("textarea").value =
       valueText.substring(0, pub) + valueText.substring(pub + 1);
     idText.focus();
-    idText.selectionStart = idText.selectionEnd = pub;
+    idText.selectionStart = pub;
+    idText.selectionEnd = pub;
   }
 }
 
@@ -802,7 +807,8 @@ function logicSpace() {
       sub
     )} ${valueText.substring(sub + range.length)}`;
     idText.focus();
-    idText.selectionStart = idText.selectionEnd = sub + 1;
+    idText.selectionStart = sub + 1;
+    idText.selectionEnd = sub + 1;
   } else {
     const positionCursor = valueText.slice(
       idText.selectionStart,
@@ -814,7 +820,8 @@ function logicSpace() {
       pub
     )} ${valueText.substring(pub)}`;
     idText.focus();
-    idText.selectionStart = idText.selectionEnd = pub + 1;
+    idText.selectionStart = pub + 1;
+    idText.selectionEnd = pub + 1;
   }
 }
 
@@ -833,7 +840,8 @@ function logicTab(event) {
     pos
   )}\t${valueText.substring(pos)}`;
   idText.focus();
-  idText.selectionStart = idText.selectionEnd = pos + 1;
+  idText.selectionStart = pos + 1;
+  idText.selectionEnd = pos + 1;
 }
 
 function logicEnter(event) {
@@ -851,7 +859,8 @@ function logicEnter(event) {
     pub
   )}\n${valueText.substring(pub)}`;
   idText.focus();
-  idText.selectionStart = idText.selectionEnd = position.length + 1;
+  idText.selectionStart = position.length + 1;
+  idText.selectionEnd = position.length + 1;
 }
 
 function logicShift() {
@@ -990,6 +999,21 @@ document.addEventListener("keyup", (KeyboardEvent) => {
   }
 });
 
+function layoutEn() {
+  if (localStorage.getItem("language") === "en") {
+    arrBtn.forEach((item) => {
+      const valueBut = document.getElementById(`${item.keyCode}`);
+      valueBut.textContent = item.keyRu;
+    });
+    return localStorage.removeItem("language");
+  }
+  arrBtn.forEach((item) => {
+    const valueBut = document.getElementById(`${item.keyCode}`);
+    valueBut.textContent = item.keyEng;
+  });
+  return localStorage.setItem("language", "en");
+}
+
 const layoutBtn = (...btnKeys) => {
   const pressed = new Set();
   document.addEventListener("keydown", (KeyboardEvent) => {
@@ -1010,21 +1034,6 @@ const layoutBtn = (...btnKeys) => {
 };
 
 layoutBtn("ShiftLeft", "AltLeft");
-
-function layoutEn() {
-  if (localStorage.getItem("language") === "en") {
-    arrBtn.forEach((item) => {
-      const valueBut = document.getElementById(`${item.keyCode}`);
-      valueBut.textContent = item.keyRu;
-    });
-    return localStorage.removeItem("language");
-  }
-  arrBtn.forEach((item) => {
-    const valueBut = document.getElementById(`${item.keyCode}`);
-    valueBut.textContent = item.keyEng;
-  });
-  return localStorage.setItem("language", "en");
-}
 
 window.addEventListener("beforeunload", (layoutEn(), logicCaps()));
 window.addEventListener("load", (layoutEn(), logicCaps()));
