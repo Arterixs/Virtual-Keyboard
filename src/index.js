@@ -818,7 +818,7 @@ function logicSpace() {
   }
 }
 
-function logicTab() {
+function logicTab(event) {
   event.preventDefault();
   const valueText = document.getElementById("textarea").value;
   const idText = document.getElementById("textarea");
@@ -836,7 +836,7 @@ function logicTab() {
   idText.selectionStart = idText.selectionEnd = pos + 1;
 }
 
-function logicEnter() {
+function logicEnter(event) {
   event.preventDefault();
   const valueText = document.getElementById("textarea").value;
   const idText = document.getElementById("textarea");
@@ -945,15 +945,15 @@ idText.focus();
 document.addEventListener("keydown", (KeyboardEvent) => {
   if (KeyboardEvent.keyCode === 9) {
     logicTab();
-    event.preventDefault();
+    KeyboardEvent.preventDefault();
   }
   if (KeyboardEvent.keyCode === 20) {
     logicCaps();
-    event.preventDefault();
+    KeyboardEvent.preventDefault();
   }
   if (KeyboardEvent.keyCode === 16) {
     logicShift();
-    event.preventDefault();
+    KeyboardEvent.preventDefault();
   }
   if (
     KeyboardEvent.keyCode === 39 ||
@@ -961,7 +961,7 @@ document.addEventListener("keydown", (KeyboardEvent) => {
     KeyboardEvent.keyCode === 37 ||
     KeyboardEvent.keyCode === 38
   ) {
-    event.preventDefault();
+    KeyboardEvent.preventDefault();
     arrBtn.forEach((item) => {
       if (item.code === KeyboardEvent.code) {
         idText.value += document.getElementById(`${item.code}`).textContent;
@@ -969,7 +969,7 @@ document.addEventListener("keydown", (KeyboardEvent) => {
     });
   }
   if (KeyboardEvent.keyCode === 18) {
-    event.preventDefault();
+    KeyboardEvent.preventDefault();
   }
   arrBtn.forEach((item) => {
     if (KeyboardEvent.code === item.code) {
