@@ -858,12 +858,12 @@ function logicShift() {
   if (localStorage.getItem("language") === "en") {
     arrBtn.forEach((item) => {
       const valueBut = document.getElementById(`${item.keyCode}`);
-      return (valueBut.textContent = item.keyShiftEN);
+      valueBut.textContent = item.keyShiftEN;
     });
   } else {
     arrBtn.forEach((item) => {
       const valueBut = document.getElementById(`${item.keyCode}`);
-      return (valueBut.textContent = item.keyShiftRu);
+      valueBut.textContent = item.keyShiftRu;
     });
   }
 }
@@ -872,12 +872,12 @@ function shiftMouseUp() {
   if (localStorage.getItem("language") === "en") {
     arrBtn.forEach((item) => {
       const valueBut = document.getElementById(`${item.keyCode}`);
-      return (valueBut.textContent = item.keyEng);
+      valueBut.textContent = item.keyEng;
     });
   } else {
     arrBtn.forEach((item) => {
       const valueBut = document.getElementById(`${item.keyCode}`);
-      return (valueBut.textContent = item.keyRu);
+      valueBut.textContent = item.keyRu;
     });
   }
 }
