@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-    "eslint": "^8.15.0"
+  "scripts": {
+    "lint": "eslint \"src/**/*.js\"",
+    "lint:fix": "eslint \"src/**/*.js\" --fix"
   },
   "devDependencies": {
+    "eslint": "^8.39.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.26.0"
-  },
-  "scripts": {
-    "lint": "eslint ./index.js",
-    "lint:fix": "eslint ./index.js --fix"
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.8.8"
   },
   "author": "",
   "license": "ISC"
