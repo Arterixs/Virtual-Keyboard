@@ -679,37 +679,43 @@ class Regen {
       p.innerHTML = arrBtn[i].keyEng;
       parent.append(btn);
       btn.append(p);
-      i === 13
-        ? ((btn.className = `${classEl} backspace`), (btn.onclick = logicBack))
-        : 0;
-      i === 14
-        ? ((btn.className = `${classEl} tab`), (btn.onclick = logicTab))
-        : 0;
-      i === 28
-        ? ((btn.className = `${classEl} delete`), (btn.onclick = logicDelete))
-        : 0;
-      i === 29
-        ? ((btn.className = `${classEl} capsLock`), (btn.onclick = logicCaps))
-        : 0;
-      i === 41
-        ? ((btn.className = `${classEl} enter`), (btn.onclick = logicEnter))
-        : 0;
-      i === 42
-        ? ((btn.className = `${classEl} shift`),
-          (btn.onmousedown = logicShift),
-          (p.onmouseup = shiftMouseUp))
-        : 0;
-      i === 54
-        ? ((btn.className = `${classEl} shift`),
-          (btn.onmousedown = logicShift),
-          (p.onmouseup = shiftMouseUp))
-        : 0;
-      i === 58
-        ? ((btn.className = `${classEl} space`), (btn.onclick = logicSpace))
-        : 0;
-      i === 62 || i === 61 || i === 60 || i === 53
-        ? (p.className = "btnName arrow")
-        : 0;
+      if (i === 13) {
+        btn.className = `${classEl} backspace`;
+        btn.onclick = logicBack;
+      }
+      if (i === 14) {
+        btn.className = `${classEl} tab`;
+        btn.onclick = logicTab;
+      }
+      if (i === 28) {
+        btn.className = `${classEl} delete`;
+        btn.onclick = logicDelete;
+      }
+      if (i === 29) {
+        btn.className = `${classEl} capsLock`;
+        btn.onclick = logicCaps;
+      }
+      if (i === 41) {
+        btn.className = `${classEl} enter`;
+        btn.onclick = logicEnter;
+      }
+      if (i === 42) {
+        btn.className = `${classEl} shift`;
+        btn.onmousedown = logicShift;
+        p.onmouseup = shiftMouseUp;
+      }
+      if (i === 54) {
+        btn.className = `${classEl} shift`;
+        btn.onmousedown = logicShift;
+        p.onmouseup = shiftMouseUp;
+      }
+      if (i === 58) {
+        btn.className = `${classEl} space`;
+        btn.onclick = logicSpace;
+      }
+      if (i === 62 || i === 61 || i === 60 || i === 53) {
+        p.className = "btnName arrow";
+      }
     }
   }
 }
