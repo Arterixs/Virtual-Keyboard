@@ -1,18 +1,17 @@
 import { arrButtonData } from './data/data-array-btn.js';
-import { ViewApp } from './view/view-app.js';
+import { ControllerApp } from './controller/controller-app.js';
 
 (function () {
-  const arrIgnore = new ViewApp(document.body, arrButtonData);
+  const controller = new ControllerApp(document.body, arrButtonData);
   document.addEventListener('keydown', (e) => {
-    console.log(e);
     e.preventDefault();
-    arrIgnore.click(e.code);
+    controller.keyDown(e.code);
   });
   document.addEventListener('keyup', (e) => {
     e.preventDefault();
-    arrIgnore.up(e.code);
+    controller.keyUp(e.code);
   });
-  console.log(arrIgnore);
+  console.log(controller);
 })();
 
 // class Regen {
