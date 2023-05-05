@@ -4,15 +4,11 @@
     "es6": true,
     "node": true
   },
-  "extends": [
-    "eslint:recommended",
-    "airbnb-base",
-    "plugin:import/recommended",
-    "prettier"
-  ],
-  "plugins": ["import"],
+  "extends": ["eslint:recommended", "airbnb-base", "plugin:import/recommended", "prettier"],
+  "plugins": ["import", "prettier"],
   "rules": {
     "import/prefer-default-export": ["off", { "target": "single" }],
-    "import/extensions": [2, { "js": "always" }]
+    "import/extensions": [2, { "js": "always" }],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "[iI]gnore" }]
   }
 }
