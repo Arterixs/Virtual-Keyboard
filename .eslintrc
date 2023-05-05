@@ -11,5 +11,8 @@
     "prettier"
   ],
   "plugins": ["import"],
-  "rules": {}
+  "rules": {
+    "import/prefer-default-export": ["off", { "target": "single" }],
+    "import/extensions": ["always"]
+  }
 }
