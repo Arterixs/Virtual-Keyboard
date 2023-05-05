@@ -3,6 +3,16 @@ import { ViewApp } from './view/view-app.js';
 
 (function () {
   const arrIgnore = new ViewApp(document.body, arrButtonData);
+  document.addEventListener('keydown', (e) => {
+    console.log(e);
+    e.preventDefault();
+    arrIgnore.click(e.code);
+  });
+  document.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    arrIgnore.up(e.code);
+  });
+  console.log(arrIgnore);
 })();
 
 // class Regen {

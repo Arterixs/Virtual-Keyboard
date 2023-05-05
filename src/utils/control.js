@@ -1,5 +1,5 @@
 export class Control {
-  constructor(parent, tag, className, textContent = "") {
+  constructor(parent, tag, className, textContent = '') {
     this.node = document.createElement(tag);
     this.node.className = className;
     if (textContent) {
