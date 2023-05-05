@@ -13,6 +13,6 @@
   "plugins": ["import"],
   "rules": {
     "import/prefer-default-export": ["off", { "target": "single" }],
-    "import/extensions": ["always"]
+    "import/extensions": [2, { "js": "always" }]
   }
 }

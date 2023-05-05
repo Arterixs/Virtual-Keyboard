@@ -1,4 +1,5 @@
 import { arrButtonData } from "./data/data-array-btn.js";
+import { Control } from "./utils/control.js";
 
 class Regen {
   constructor(nameElement) {
