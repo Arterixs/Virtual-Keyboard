@@ -1,5 +1,6 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
+import { getNewString } from '../utils/helpers.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
@@ -77,6 +78,16 @@ export class ControllerApp {
 
   inputText(content) {
     const { textarea } = this.view;
-    textarea.value += content;
+    const positionCaret = textarea.selectionStart;
+    if (textarea.value.length !== positionCaret) {
+      const newString = getNewString(positionCaret, textarea.value, content);
+      const updatePositionCaret = positionCaret + content.length;
+      textarea.value = newString;
+      textarea.selectionStart = updatePositionCaret;
+      textarea.selectionEnd = updatePositionCaret;
+    } else {
+      textarea.value += content;
+    }
+    textarea.focus();
   }
 }
