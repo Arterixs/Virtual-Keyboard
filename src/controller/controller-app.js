@@ -18,17 +18,65 @@ export class ControllerApp {
 
   keyUp(code) {
     if (this.model.collectionCodeBtn.has(code)) {
-      const keyCode = this.model.collectionCodeBtn.get(code);
-      const btn = this.model.arrayBtn[keyCode];
+      const buttonIndex = this.model.collectionCodeBtn.get(code);
+      const btn = this.model.arrayBtn[buttonIndex];
       btn.classList.remove('active');
     }
   }
 
   keyDown(code) {
     if (this.model.collectionCodeBtn.has(code)) {
-      const keyCode = this.model.collectionCodeBtn.get(code);
-      const btn = this.model.arrayBtn[keyCode];
+      const buttonIndex = this.model.collectionCodeBtn.get(code);
+      const btn = this.model.arrayBtn[buttonIndex];
       btn.classList.add('active');
+      this.checkKey(code, btn.textContent);
     }
+  }
+
+  checkKey(code, contentKey) {
+    switch (code) {
+      case 'Tab':
+        break;
+      case 'CapsLock':
+        break;
+      case 'ShiftLeft':
+        break;
+      case 'ControlLeft':
+        break;
+      case 'WakeUp':
+        break;
+      case 'AltLeft':
+        break;
+      case 'Space':
+        break;
+      case 'AltRight':
+        break;
+      case 'ControlRight':
+        break;
+      case 'ArrowLeft':
+        break;
+      case 'ArrowUp':
+        break;
+      case 'ArrowRight':
+        break;
+      case 'ArrowDown':
+        break;
+      case 'ShiftRight':
+        break;
+      case 'Enter':
+        break;
+      case 'Backspace':
+        break;
+      case 'Delete':
+        break;
+      default:
+        this.inputText(contentKey);
+        break;
+    }
+  }
+
+  inputText(content) {
+    const { textarea } = this.view;
+    textarea.value += content;
   }
 }

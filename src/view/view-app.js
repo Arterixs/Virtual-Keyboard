@@ -3,6 +3,7 @@ import { Control } from '../utils/control.js';
 export class ViewApp {
   constructor(root, arrButton, setBtn, setCodeBtn) {
     this.root = root;
+    this.textarea = null;
     this.render(arrButton, setBtn, setCodeBtn);
   }
 
@@ -16,7 +17,7 @@ export class ViewApp {
     );
     const container = new Control(wrapper.node, 'div', 'container');
     const monitorWrap = new Control(container.node, 'div', 'wrapper_monitor');
-    const monitorIgnore = new Control(monitorWrap.node, 'textarea', 'monitor');
+    const monitor = new Control(monitorWrap.node, 'textarea', 'monitor');
     const keyboardWrap = new Control(container.node, 'div', 'wrapper_keyboard');
     const line = new Control(keyboardWrap.node, 'div', 'line');
     for (let i = 0; i < arrButton.length; i += 1) {
@@ -25,5 +26,6 @@ export class ViewApp {
       setBtn(button.node);
       setCodeBtn(arrButton[i].code, i);
     }
+    this.textarea = monitor.node;
   }
 }

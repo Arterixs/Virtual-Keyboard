@@ -6,12 +6,12 @@ import { ControllerApp } from './controller/controller-app.js';
   document.addEventListener('keydown', (e) => {
     e.preventDefault();
     controller.keyDown(e.code);
+    console.log(e.code, e.key);
   });
   document.addEventListener('keyup', (e) => {
     e.preventDefault();
     controller.keyUp(e.code);
   });
-  console.log(controller);
 })();
 
 // class Regen {
