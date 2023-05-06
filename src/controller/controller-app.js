@@ -7,6 +7,7 @@ export class ControllerApp {
     this.model = new ModelApp(dataBtn);
     const { dataButtons } = this.model;
     this.view = new ViewApp(root, dataButtons, this.setBtn.bind(this), this.setCodeBtn.bind(this));
+    this.capsFlag = false;
   }
 
   setBtn(btn) {
@@ -40,6 +41,7 @@ export class ControllerApp {
         this.inputText('    ');
         break;
       case 'CapsLock':
+        this.logicCapsLock(code);
         break;
       case 'ShiftLeft':
         break;
@@ -140,5 +142,18 @@ export class ControllerApp {
       textarea.value = getDelString(positionCaret, textarea.value);
     }
     textarea.focus();
+  }
+
+  logicCapsLock() {
+    const { dataButtons, arrayBtn } = this.model;
+    this.capsFlag = !this.capsFlag;
+    arrayBtn.forEach((item, indx) => {
+      const keyCode = dataButtons[indx].code;
+      const keyContent = dataButtons[indx].keyShiftEN;
+      if (`Key${keyContent}` === keyCode) {
+        const copyItem = item;
+        copyItem.textContent = this.capsFlag ? keyContent : dataButtons[indx].keyEng;
+      }
+    });
   }
 }

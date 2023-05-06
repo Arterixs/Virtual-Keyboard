@@ -267,7 +267,7 @@ import { ControllerApp } from './controller/controller-app.js';
 //   if (localStorage.getItem("language") === "en") {
 //     if (localStorage.getItem("caps") !== "off") {
 //       arrButtonData.forEach((item) => {
-//         if (item.code === "Key" + `${item.keyShiftEN}`) {
+//         if (item.code === ""Key + `${item.keyShiftEN}`) {
 //           const valueBut = document.getElementById(`${item.keyCode}`);
 //           valueBut.textContent = item.keyEng;
 //         }
