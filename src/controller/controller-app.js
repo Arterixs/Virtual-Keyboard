@@ -37,6 +37,7 @@ export class ControllerApp {
   checkKey(code, contentKey) {
     switch (code) {
       case 'Tab':
+        this.inputText('    ');
         break;
       case 'CapsLock':
         break;
@@ -65,6 +66,7 @@ export class ControllerApp {
       case 'ShiftRight':
         break;
       case 'Enter':
+        this.pressEnter();
         break;
       case 'Backspace':
         break;
@@ -82,6 +84,22 @@ export class ControllerApp {
     if (textarea.value.length !== positionCaret) {
       const newString = getNewString(positionCaret, textarea.value, content);
       const updatePositionCaret = positionCaret + content.length;
+      textarea.value = newString;
+      textarea.selectionStart = updatePositionCaret;
+      textarea.selectionEnd = updatePositionCaret;
+    } else {
+      textarea.value += content;
+    }
+    textarea.focus();
+  }
+
+  pressEnter() {
+    const { textarea } = this.view;
+    const positionCaret = textarea.selectionStart;
+    const content = '\n';
+    if (textarea.value.length !== positionCaret) {
+      const newString = getNewString(positionCaret, textarea.value, content);
+      const updatePositionCaret = positionCaret + 1;
       textarea.value = newString;
       textarea.selectionStart = updatePositionCaret;
       textarea.selectionEnd = updatePositionCaret;
