@@ -1,6 +1,6 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
-import { getNewString } from '../utils/helpers.js';
+import { getNewString, getDeleteString, getDelString } from '../utils/helpers.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
@@ -50,6 +50,7 @@ export class ControllerApp {
       case 'AltLeft':
         break;
       case 'Space':
+        this.inputText(' ');
         break;
       case 'AltRight':
         break;
@@ -69,8 +70,10 @@ export class ControllerApp {
         this.pressEnter();
         break;
       case 'Backspace':
+        this.logicBackspace();
         break;
       case 'Delete':
+        this.logicDelete();
         break;
       default:
         this.inputText(contentKey);
@@ -105,6 +108,36 @@ export class ControllerApp {
       textarea.selectionEnd = updatePositionCaret;
     } else {
       textarea.value += content;
+    }
+    textarea.focus();
+  }
+
+  logicBackspace() {
+    const { textarea } = this.view;
+    const positionCaret = textarea.selectionStart;
+    if (textarea.value.length !== positionCaret) {
+      const newString = getDeleteString(positionCaret, textarea.value);
+      const updatePositionCaret = positionCaret ? positionCaret - 1 : positionCaret;
+      textarea.value = newString;
+      textarea.selectionStart = updatePositionCaret;
+      textarea.selectionEnd = updatePositionCaret;
+    } else {
+      textarea.value = getDeleteString(positionCaret, textarea.value);
+    }
+    textarea.focus();
+  }
+
+  logicDelete() {
+    const { textarea } = this.view;
+    const positionCaret = textarea.selectionStart;
+    if (textarea.value.length !== positionCaret) {
+      const newString = getDelString(positionCaret, textarea.value);
+      const updatePositionCaret = positionCaret;
+      textarea.value = newString;
+      textarea.selectionStart = updatePositionCaret;
+      textarea.selectionEnd = updatePositionCaret;
+    } else {
+      textarea.value = getDelString(positionCaret, textarea.value);
     }
     textarea.focus();
   }
