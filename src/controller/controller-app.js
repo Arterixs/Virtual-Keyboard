@@ -23,6 +23,9 @@ export class ControllerApp {
       const buttonIndex = this.model.collectionCodeBtn.get(code);
       const btn = this.model.arrayBtn[buttonIndex];
       btn.classList.remove('active');
+      if (code === 'ShiftLeft' || code === 'ShiftRight') {
+        this.logicShift(false);
+      }
     }
   }
 
@@ -43,7 +46,8 @@ export class ControllerApp {
       case 'CapsLock':
         this.logicCapsLock(code);
         break;
-      case 'ShiftLeft':
+      case 'ShiftLeft' || 'ShiftRight':
+        this.logicShift(true);
         break;
       case 'ControlLeft':
         break;
@@ -153,6 +157,18 @@ export class ControllerApp {
       if (`Key${keyContent}` === keyCode) {
         const copyItem = item;
         copyItem.textContent = this.capsFlag ? keyContent : dataButtons[indx].keyEng;
+      }
+    });
+  }
+
+  logicShift(flag) {
+    const { dataButtons, arrayBtn } = this.model;
+    arrayBtn.forEach((button, indx) => {
+      const keyCode = dataButtons[indx].keyEng;
+      const keyText = dataButtons[indx].keyShiftEN;
+      if (keyText !== keyCode) {
+        const copyButton = button;
+        copyButton.textContent = flag ? keyText : dataButtons[indx].keyEng;
       }
     });
   }
