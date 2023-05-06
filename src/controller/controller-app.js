@@ -1,6 +1,6 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
-import { getNewString, getDeleteString, getDelString } from '../utils/helpers.js';
+import { getNewString, getNewPositionCaret } from '../utils/helpers.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
@@ -41,12 +41,15 @@ export class ControllerApp {
   checkKey(code, contentKey) {
     switch (code) {
       case 'Tab':
-        this.inputText('    ');
+        this.controlerInputKey(code, '    ');
         break;
       case 'CapsLock':
         this.logicCapsLock(code);
         break;
-      case 'ShiftLeft' || 'ShiftRight':
+      case 'ShiftLeft':
+        this.logicShift(true);
+        break;
+      case 'ShiftRight':
         this.logicShift(true);
         break;
       case 'ControlLeft':
@@ -56,7 +59,7 @@ export class ControllerApp {
       case 'AltLeft':
         break;
       case 'Space':
-        this.inputText(' ');
+        this.controlerInputKey(code, ' ');
         break;
       case 'AltRight':
         break;
@@ -75,80 +78,36 @@ export class ControllerApp {
         this.selectDown();
         break;
       case 'Enter':
-        this.pressEnter();
+        this.controlerInputKey(code, '\n');
         break;
       case 'Backspace':
-        this.logicBackspace();
+        this.controlerInputKey(code);
         break;
       case 'Delete':
-        this.logicDelete();
+        this.controlerInputKey(code);
         break;
       default:
-        this.inputText(contentKey);
+        this.controlerInputKey(code, contentKey);
         break;
     }
   }
 
-  inputText(content) {
+  controlerInputKey(code, content = '') {
     const { textarea } = this.view;
     const positionCaret = textarea.selectionStart;
+    const newLine = getNewString(positionCaret, textarea.value, content, code);
     if (textarea.value.length !== positionCaret) {
-      const newString = getNewString(positionCaret, textarea.value, content);
-      const updatePositionCaret = positionCaret + content.length;
-      textarea.value = newString;
-      textarea.selectionStart = updatePositionCaret;
-      textarea.selectionEnd = updatePositionCaret;
+      const newPosCaret = getNewPositionCaret(code, positionCaret, content);
+      textarea.value = newLine;
+      textarea.selectionStart = newPosCaret;
+      textarea.selectionEnd = newPosCaret;
     } else {
-      textarea.value += content;
+      textarea.value = newLine;
     }
     textarea.focus();
   }
 
-  pressEnter() {
-    const { textarea } = this.view;
-    const positionCaret = textarea.selectionStart;
-    const content = '\n';
-    if (textarea.value.length !== positionCaret) {
-      const newString = getNewString(positionCaret, textarea.value, content);
-      const updatePositionCaret = positionCaret + 1;
-      textarea.value = newString;
-      textarea.selectionStart = updatePositionCaret;
-      textarea.selectionEnd = updatePositionCaret;
-    } else {
-      textarea.value += content;
-    }
-    textarea.focus();
-  }
-
-  logicBackspace() {
-    const { textarea } = this.view;
-    const positionCaret = textarea.selectionStart;
-    if (textarea.value.length !== positionCaret) {
-      const newString = getDeleteString(positionCaret, textarea.value);
-      const updatePositionCaret = positionCaret ? positionCaret - 1 : positionCaret;
-      textarea.value = newString;
-      textarea.selectionStart = updatePositionCaret;
-      textarea.selectionEnd = updatePositionCaret;
-    } else {
-      textarea.value = getDeleteString(positionCaret, textarea.value);
-    }
-    textarea.focus();
-  }
-
-  logicDelete() {
-    const { textarea } = this.view;
-    const positionCaret = textarea.selectionStart;
-    if (textarea.value.length !== positionCaret) {
-      const newString = getDelString(positionCaret, textarea.value);
-      const updatePositionCaret = positionCaret;
-      textarea.value = newString;
-      textarea.selectionStart = updatePositionCaret;
-      textarea.selectionEnd = updatePositionCaret;
-    } else {
-      textarea.value = getDelString(positionCaret, textarea.value);
-    }
-    textarea.focus();
-  }
+  // //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   logicCapsLock() {
     const { dataButtons, arrayBtn } = this.model;
