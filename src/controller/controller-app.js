@@ -63,14 +63,16 @@ export class ControllerApp {
       case 'ControlRight':
         break;
       case 'ArrowLeft':
+        this.selectLeft();
         break;
       case 'ArrowUp':
+        this.selectUp();
         break;
       case 'ArrowRight':
+        this.selectRight();
         break;
       case 'ArrowDown':
-        break;
-      case 'ShiftRight':
+        this.selectDown();
         break;
       case 'Enter':
         this.pressEnter();
@@ -171,5 +173,25 @@ export class ControllerApp {
         copyButton.textContent = flag ? keyText : dataButtons[indx].keyEng;
       }
     });
+  }
+
+  selectRight() {
+    const selection = getSelection();
+    selection.modify('move', 'right', 'character');
+  }
+
+  selectLeft() {
+    const selection = getSelection();
+    selection.modify('move', 'left', 'character');
+  }
+
+  selectUp() {
+    const selection = getSelection();
+    selection.modify('move', 'backward', 'line');
+  }
+
+  selectDown() {
+    const selection = getSelection();
+    selection.modify('move', 'forward', 'line');
   }
 }
