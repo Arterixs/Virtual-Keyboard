@@ -24,7 +24,7 @@ export class ControllerApp {
       const btn = this.model.arrayBtn[buttonIndex];
       btn.classList.remove('active');
       if (code === 'ShiftLeft' || code === 'ShiftRight') {
-        this.logicShift(false);
+        this.logicUpperCase(code, false);
       }
     }
   }
@@ -44,13 +44,13 @@ export class ControllerApp {
         this.controlerInputKey(code, '    ');
         break;
       case 'CapsLock':
-        this.logicCapsLock(code);
+        this.logicUpperCase(code, this.capsFlag);
         break;
       case 'ShiftLeft':
-        this.logicShift(true);
+        this.logicUpperCase(code, true);
         break;
       case 'ShiftRight':
-        this.logicShift(true);
+        this.logicUpperCase(code, true);
         break;
       case 'ControlLeft':
         break;
@@ -109,29 +109,35 @@ export class ControllerApp {
 
   // //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  logicCapsLock() {
+  logicUpperCase(codeKey, flag) {
     const { dataButtons, arrayBtn } = this.model;
-    this.capsFlag = !this.capsFlag;
-    arrayBtn.forEach((item, indx) => {
-      const keyCode = dataButtons[indx].code;
-      const keyContent = dataButtons[indx].keyShiftEN;
-      if (`Key${keyContent}` === keyCode) {
-        const copyItem = item;
-        copyItem.textContent = this.capsFlag ? keyContent : dataButtons[indx].keyEng;
+    const isCaps = codeKey === 'CapsLock';
+    if (isCaps) this.capsFlag = !this.capsFlag;
+    arrayBtn.forEach((button, indx) => {
+      const { code, keyShiftEN, keyEng } = dataButtons[indx];
+      const convertKeyCode = `Key${keyShiftEN}`;
+      const isKeyLetter = convertKeyCode === code;
+      if (isCaps && isKeyLetter) {
+        const copyButton = button;
+        copyButton.textContent = flag ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
+      }
+      if (!isCaps && keyShiftEN !== keyEng) {
+        this.shift(button, flag, isKeyLetter, keyShiftEN, keyEng);
       }
     });
   }
 
-  logicShift(flag) {
-    const { dataButtons, arrayBtn } = this.model;
-    arrayBtn.forEach((button, indx) => {
-      const keyCode = dataButtons[indx].keyEng;
-      const keyText = dataButtons[indx].keyShiftEN;
-      if (keyText !== keyCode) {
-        const copyButton = button;
-        copyButton.textContent = flag ? keyText : dataButtons[indx].keyEng;
+  shift(button, flag, isKeyLetter, keyShiftEN, keyEng) {
+    const copyButton = button;
+    if (isKeyLetter) {
+      if (this.capsFlag) {
+        copyButton.textContent = flag ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
+      } else {
+        copyButton.textContent = flag ? copyButton.textContent.toUpperCase() : copyButton.textContent.toLowerCase();
       }
-    });
+    } else {
+      copyButton.textContent = flag ? keyShiftEN : keyEng;
+    }
   }
 
   selectRight() {
