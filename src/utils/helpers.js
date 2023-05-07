@@ -17,3 +17,8 @@ export const getNewPositionCaret = (code, position, content) => {
   if (code === 'Delete') return position;
   return position + content.length;
 };
+
+export const arrowApi = (direction, typeLine) => {
+  const selection = getSelection();
+  selection.modify('move', direction, typeLine);
+};

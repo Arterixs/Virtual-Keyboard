@@ -1,6 +1,6 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
-import { getNewString, getNewPositionCaret } from '../utils/helpers.js';
+import { getNewString, getNewPositionCaret, arrowApi } from '../utils/helpers.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
@@ -66,16 +66,16 @@ export class ControllerApp {
       case 'ControlRight':
         break;
       case 'ArrowLeft':
-        this.selectLeft();
+        arrowApi('left', 'character');
         break;
       case 'ArrowUp':
-        this.selectUp();
+        arrowApi('backward', 'line');
         break;
       case 'ArrowRight':
-        this.selectRight();
+        arrowApi('right', 'character');
         break;
       case 'ArrowDown':
-        this.selectDown();
+        arrowApi('forward', 'line');
         break;
       case 'Enter':
         this.controlerInputKey(code, '\n');
@@ -107,8 +107,6 @@ export class ControllerApp {
     textarea.focus();
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   logicUpperCase(codeKey, flag) {
     const { dataButtons, arrayBtn } = this.model;
     const isCaps = codeKey === 'CapsLock';
@@ -138,25 +136,5 @@ export class ControllerApp {
     } else {
       copyButton.textContent = flag ? keyShiftEN : keyEng;
     }
-  }
-
-  selectRight() {
-    const selection = getSelection();
-    selection.modify('move', 'right', 'character');
-  }
-
-  selectLeft() {
-    const selection = getSelection();
-    selection.modify('move', 'left', 'character');
-  }
-
-  selectUp() {
-    const selection = getSelection();
-    selection.modify('move', 'backward', 'line');
-  }
-
-  selectDown() {
-    const selection = getSelection();
-    selection.modify('move', 'forward', 'line');
   }
 }
