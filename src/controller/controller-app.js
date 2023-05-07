@@ -5,23 +5,21 @@ import { getNewString, getNewPositionCaret, arrowApi } from '../utils/helpers.js
 export class ControllerApp {
   constructor(root, dataBtn) {
     this.model = new ModelApp(dataBtn);
-    const { dataButtons } = this.model;
-    this.view = new ViewApp(root, dataButtons, this.setBtn.bind(this), this.setCodeBtn.bind(this));
-    this.capsFlag = false;
+    this.view = new ViewApp(root, this.model.getButtinsArray(), this.setBtn.bind(this), this.setCodeBtn.bind(this));
   }
 
   setBtn(btn) {
-    this.model.arrayBtn.push(btn);
+    this.model.setArrayBtn(btn);
   }
 
   setCodeBtn(code, index) {
-    this.model.collectionCodeBtn.set(code, index);
+    this.model.setKeyCode(code, index);
   }
 
   keyUp(code) {
-    if (this.model.collectionCodeBtn.has(code)) {
-      const buttonIndex = this.model.collectionCodeBtn.get(code);
-      const btn = this.model.arrayBtn[buttonIndex];
+    if (this.model.checkKeyCode(code)) {
+      const buttonIndex = this.model.getKeyCode(code);
+      const btn = this.model.getButton(buttonIndex);
       btn.classList.remove('active');
       if (code === 'ShiftLeft' || code === 'ShiftRight') {
         this.logicUpperCase(code, false);
@@ -30,9 +28,9 @@ export class ControllerApp {
   }
 
   keyDown(code) {
-    if (this.model.collectionCodeBtn.has(code)) {
-      const buttonIndex = this.model.collectionCodeBtn.get(code);
-      const btn = this.model.arrayBtn[buttonIndex];
+    if (this.model.checkKeyCode(code)) {
+      const buttonIndex = this.model.getKeyCode(code);
+      const btn = this.model.getButton(buttonIndex);
       btn.classList.add('active');
       this.checkKey(code, btn.textContent);
     }
@@ -44,7 +42,7 @@ export class ControllerApp {
         this.controlerInputKey(code, '    ');
         break;
       case 'CapsLock':
-        this.logicUpperCase(code, this.capsFlag);
+        this.logicUpperCase(code, this.model.getCapsFlag());
         break;
       case 'ShiftLeft':
         this.logicUpperCase(code, true);
@@ -110,7 +108,7 @@ export class ControllerApp {
   logicUpperCase(codeKey, flag) {
     const { dataButtons, arrayBtn } = this.model;
     const isCaps = codeKey === 'CapsLock';
-    if (isCaps) this.capsFlag = !this.capsFlag;
+    if (isCaps) this.model.changeCapsFlag();
     arrayBtn.forEach((button, indx) => {
       const { code, keyShiftEN, keyEng } = dataButtons[indx];
       const convertKeyCode = `Key${keyShiftEN}`;
@@ -128,7 +126,7 @@ export class ControllerApp {
   shift(button, flag, isKeyLetter, keyShiftEN, keyEng) {
     const copyButton = button;
     if (isKeyLetter) {
-      if (this.capsFlag) {
+      if (this.model.getCapsFlag()) {
         copyButton.textContent = flag ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
       } else {
         copyButton.textContent = flag ? copyButton.textContent.toUpperCase() : copyButton.textContent.toLowerCase();
