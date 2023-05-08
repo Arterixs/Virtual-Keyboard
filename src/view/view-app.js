@@ -21,8 +21,7 @@ export class ViewApp {
     const keyboardWrap = new Control(container.node, 'div', 'wrapper_keyboard');
     const line = new Control(keyboardWrap.node, 'div', 'line');
     for (let i = 0; i < arrButton.length; i += 1) {
-      const button = new Control(line.node, 'button', arrButton[i].className);
-      const spanIgnore = new Control(button.node, 'span', 'button__span', arrButton[i].keyEng);
+      const button = new Control(line.node, 'button', arrButton[i].className, arrButton[i].keyEng);
       setBtn(button.node);
       setCodeBtn(arrButton[i].code, i);
     }

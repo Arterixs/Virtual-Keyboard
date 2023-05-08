@@ -18,7 +18,7 @@ export class ModelApp {
     this.arrayBtn.push(button);
   }
 
-  getButtinsArray() {
+  getButtonsArray() {
     return this.dataButtons;
   }
 
