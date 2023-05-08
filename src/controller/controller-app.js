@@ -1,6 +1,6 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
-import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps } from '../utils/helpers.js';
+import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps, changeShiftTextContent } from '../utils/helpers.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
@@ -155,24 +155,15 @@ export class ControllerApp {
     arrayBtn.forEach((button, indx) => {
       const { code, keyShiftRu, keyShiftEN, keyRu, keyEng } = dataButtons[indx];
       if (!checkKeysCaps(code)) return;
-      const convertKeyCode = `Key${keyShiftEN}`;
-      const isKeyLetter = convertKeyCode === code;
+      const isKeyLetter = `Key${keyShiftEN}` === code;
       const copyButton = button;
       if (isKeyLetter) {
-        if (isShift) {
-          copyButton.textContent = isCaps ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
-        } else {
-          copyButton.textContent = isCaps ? copyButton.textContent.toUpperCase() : copyButton.textContent.toLowerCase();
-        }
+        changeShiftTextContent(button, isShift, isCaps);
       } else {
         const loverCaseLang = this.lang ? keyRu : keyEng;
         const upperCaseLang = this.lang ? keyShiftRu : keyShiftEN;
         copyButton.textContent = isShift ? upperCaseLang : loverCaseLang;
-        if (isShift) {
-          copyButton.textContent = isCaps ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
-        } else {
-          copyButton.textContent = isCaps ? copyButton.textContent.toUpperCase() : copyButton.textContent.toLowerCase();
-        }
+        changeShiftTextContent(button, isShift, isCaps);
       }
     });
   }
