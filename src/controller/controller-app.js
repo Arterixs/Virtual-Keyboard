@@ -6,16 +6,6 @@ export class ControllerApp {
   constructor(root, dataBtn) {
     this.model = new ModelApp(dataBtn);
     this.view = new ViewApp(root, this.model.getButtonsArray(), this.setBtn.bind(this), this.setCodeBtn.bind(this));
-    this.set = new Set();
-    this.lang = false;
-  }
-
-  setBtn(btn) {
-    this.model.setArrayBtn(btn);
-  }
-
-  setCodeBtn(code, index) {
-    this.model.setKeyCode(code, index);
   }
 
   keyUp(code) {
@@ -32,22 +22,6 @@ export class ControllerApp {
     }
   }
 
-  clearSet() {
-    this.set.clear();
-  }
-
-  checkSet() {
-    if (this.set.size === 2) {
-      this.lang = !this.lang;
-      this.swiftLanguage();
-    }
-  }
-
-  setSet(code) {
-    this.set.add(code);
-    this.checkSet();
-  }
-
   keyDown(code) {
     if (this.model.checkKeyCode(code)) {
       const buttonIndex = this.model.getKeyCode(code);
@@ -57,18 +31,43 @@ export class ControllerApp {
     }
   }
 
+  setBtn(btn) {
+    this.model.setArrayBtn(btn);
+  }
+
+  setCodeBtn(code, index) {
+    this.model.setKeyCode(code, index);
+  }
+
+  clearSet() {
+    this.model.cleanKeyLang();
+  }
+
+  checkKeysLang() {
+    const amountKeysPress = this.model.getSizeKeysLang();
+    if (amountKeysPress === 2) {
+      this.model.swiftLang();
+      this.changeLanguage();
+    }
+  }
+
+  setKeyLang(code) {
+    this.model.setKeysLang(code);
+    this.checkKeysLang();
+  }
+
   checkKey(code, contentKey) {
     switch (code) {
       case 'Tab':
         this.controlerInputKey(code, '    ');
         break;
       case 'CapsLock':
-        this.model.changeCapsFlag();
+        this.model.swiftCapsFlag();
         this.logicCapsLock(this.model.getCapsFlag());
         break;
       case 'ShiftLeft':
         this.logicShift(true);
-        this.setSet(code);
+        this.setKeyLang(code);
         break;
       case 'ShiftRight':
         this.logicShift(true);
@@ -78,7 +77,7 @@ export class ControllerApp {
       case 'WakeUp':
         break;
       case 'AltLeft':
-        this.setSet(code);
+        this.setKeyLang(code);
         break;
       case 'Space':
         this.controlerInputKey(code, ' ');
@@ -129,12 +128,13 @@ export class ControllerApp {
     textarea.focus();
   }
 
-  swiftLanguage() {
+  changeLanguage() {
     const { dataButtons, arrayBtn } = this.model;
+    const currentLang = this.model.getLang();
     arrayBtn.forEach((button, indx) => {
       const { keyRu, keyEng } = dataButtons[indx];
       const copyButton = button;
-      copyButton.textContent = this.lang ? keyRu : keyEng;
+      copyButton.textContent = currentLang ? keyRu : keyEng;
     });
   }
 
@@ -152,6 +152,7 @@ export class ControllerApp {
   logicShift(isShift) {
     const { dataButtons, arrayBtn } = this.model;
     const isCaps = this.model.getCapsFlag();
+    const currentLang = this.model.getLang();
     arrayBtn.forEach((button, indx) => {
       const { code, keyShiftRu, keyShiftEN, keyRu, keyEng } = dataButtons[indx];
       if (!checkKeysCaps(code)) return;
@@ -160,8 +161,8 @@ export class ControllerApp {
       if (isKeyLetter) {
         changeShiftTextContent(button, isShift, isCaps);
       } else {
-        const loverCaseLang = this.lang ? keyRu : keyEng;
-        const upperCaseLang = this.lang ? keyShiftRu : keyShiftEN;
+        const loverCaseLang = currentLang ? keyRu : keyEng;
+        const upperCaseLang = currentLang ? keyShiftRu : keyShiftEN;
         copyButton.textContent = isShift ? upperCaseLang : loverCaseLang;
         changeShiftTextContent(button, isShift, isCaps);
       }

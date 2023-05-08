@@ -1,16 +1,38 @@
 export class ModelApp {
   constructor(dataBtn) {
     this.collectionCodeBtn = new Map();
+    this.keysLang = new Set();
     this.arrayBtn = [];
     this.dataButtons = dataBtn;
+    this.langEn = false;
     this.capsFlag = false;
+  }
+
+  setKeysLang(key) {
+    this.keysLang.add(key);
+  }
+
+  cleanKeyLang() {
+    this.keysLang.clear();
+  }
+
+  getSizeKeysLang() {
+    return this.keysLang.size;
+  }
+
+  getLang() {
+    return this.langEn;
+  }
+
+  swiftLang() {
+    this.langEn = !this.langEn;
   }
 
   getCapsFlag() {
     return this.capsFlag;
   }
 
-  changeCapsFlag() {
+  swiftCapsFlag() {
     this.capsFlag = !this.capsFlag;
   }
 
