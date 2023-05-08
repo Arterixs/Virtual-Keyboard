@@ -22,3 +22,44 @@ export const arrowApi = (direction, typeLine) => {
   const selection = getSelection();
   selection.modify('move', direction, typeLine);
 };
+
+export const checkKeysCaps = (code) => {
+  switch (code) {
+    case 'Tab':
+      return false;
+    case 'CapsLock':
+      return false;
+    case 'ShiftLeft':
+      return false;
+    case 'ShiftRight':
+      return false;
+    case 'ControlLeft':
+      return false;
+    case 'WakeUp':
+      return false;
+    case 'AltLeft':
+      return false;
+    case 'Space':
+      return false;
+    case 'AltRight':
+      return false;
+    case 'ControlRight':
+      return false;
+    case 'ArrowLeft':
+      return false;
+    case 'ArrowUp':
+      return false;
+    case 'ArrowRight':
+      return false;
+    case 'ArrowDown':
+      return false;
+    case 'Enter':
+      return false;
+    case 'Backspace':
+      return false;
+    case 'Delete':
+      return false;
+    default:
+      return true;
+  }
+};

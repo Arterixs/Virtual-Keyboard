@@ -1,11 +1,13 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
-import { getNewString, getNewPositionCaret, arrowApi } from '../utils/helpers.js';
+import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps } from '../utils/helpers.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
     this.model = new ModelApp(dataBtn);
     this.view = new ViewApp(root, this.model.getButtinsArray(), this.setBtn.bind(this), this.setCodeBtn.bind(this));
+    this.set = new Set();
+    this.lang = false;
   }
 
   setBtn(btn) {
@@ -24,7 +26,27 @@ export class ControllerApp {
       if (code === 'ShiftLeft' || code === 'ShiftRight') {
         this.logicUpperCase(code, false);
       }
+      if (code === 'ShiftLeft' || code === 'AltLeft') {
+        this.clearSet();
+      }
     }
+  }
+
+  clearSet() {
+    this.set.clear();
+  }
+
+  checkSet() {
+    if (this.set.size === 2) {
+      this.lang = !this.lang;
+      this.swiftLanguage();
+      console.log('переключил', this.set);
+    }
+  }
+
+  setSet(code) {
+    this.set.add(code);
+    this.checkSet();
   }
 
   keyDown(code) {
@@ -33,6 +55,7 @@ export class ControllerApp {
       const btn = this.model.getButton(buttonIndex);
       btn.classList.add('active');
       this.checkKey(code, btn.textContent);
+      console.log(code);
     }
   }
 
@@ -46,6 +69,7 @@ export class ControllerApp {
         break;
       case 'ShiftLeft':
         this.logicUpperCase(code, true);
+        this.setSet(code);
         break;
       case 'ShiftRight':
         this.logicUpperCase(code, true);
@@ -55,6 +79,7 @@ export class ControllerApp {
       case 'WakeUp':
         break;
       case 'AltLeft':
+        this.setSet(code);
         break;
       case 'Space':
         this.controlerInputKey(code, ' ');
@@ -105,25 +130,34 @@ export class ControllerApp {
     textarea.focus();
   }
 
+  swiftLanguage() {
+    const { dataButtons, arrayBtn } = this.model;
+    arrayBtn.forEach((button, indx) => {
+      const { keyRu, keyEng } = dataButtons[indx];
+      const copyButton = button;
+      copyButton.textContent = this.lang ? keyRu : keyEng;
+    });
+  }
+
   logicUpperCase(codeKey, flag) {
     const { dataButtons, arrayBtn } = this.model;
     const isCaps = codeKey === 'CapsLock';
     if (isCaps) this.model.changeCapsFlag();
     arrayBtn.forEach((button, indx) => {
-      const { code, keyShiftEN, keyEng } = dataButtons[indx];
+      const { code, keyShiftEN, keyRu, keyShiftRu, keyEng } = dataButtons[indx];
       const convertKeyCode = `Key${keyShiftEN}`;
       const isKeyLetter = convertKeyCode === code;
-      if (isCaps && isKeyLetter) {
+      if (isCaps && checkKeysCaps(code)) {
         const copyButton = button;
         copyButton.textContent = flag ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
       }
       if (!isCaps && keyShiftEN !== keyEng) {
-        this.shift(button, flag, isKeyLetter, keyShiftEN, keyEng);
+        this.shift(button, flag, isKeyLetter, keyShiftEN, keyEng, keyShiftRu, keyRu);
       }
     });
   }
 
-  shift(button, flag, isKeyLetter, keyShiftEN, keyEng) {
+  shift(button, flag, isKeyLetter, keyShiftEN, keyEng, keyShiftRu, keyRu) {
     const copyButton = button;
     if (isKeyLetter) {
       if (this.model.getCapsFlag()) {
@@ -132,7 +166,9 @@ export class ControllerApp {
         copyButton.textContent = flag ? copyButton.textContent.toUpperCase() : copyButton.textContent.toLowerCase();
       }
     } else {
-      copyButton.textContent = flag ? keyShiftEN : keyEng;
+      const lang = this.lang ? keyRu : keyEng;
+      const shiftLang = this.lang ? keyShiftRu : keyShiftEN;
+      copyButton.textContent = flag ? shiftLang : lang;
     }
   }
 }
