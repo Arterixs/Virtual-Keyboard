@@ -1,7 +1,7 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
 import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps, changeShiftTextContent } from '../utils/helpers.js';
-import { ENTER_CONTENT, SPACE_CONTENT, TAB_CONTENT } from '../utils/constants/content.js';
+import { ENTER_CONTENT, SPACE_CONTENT, TAB_CONTENT, TITLE_CONTENT_RU, TITLE_CONTENT_EN } from '../utils/constants/content.js';
 import {
   ENTER,
   TAB,
@@ -232,9 +232,19 @@ export class ControllerApp {
     textarea.focus();
   }
 
+  changeTitleLang(lang) {
+    const { title } = this.view;
+    if (lang) {
+      title.textContent = TITLE_CONTENT_RU;
+    } else {
+      title.textContent = TITLE_CONTENT_EN;
+    }
+  }
+
   changeLanguage() {
     const { dataButtons, arrayBtn } = this.model;
     const currentLang = this.model.getLang();
+    this.changeTitleLang(currentLang);
     arrayBtn.forEach((button, indx) => {
       const { keyRu, keyEng } = dataButtons[indx];
       const copyButton = button;
