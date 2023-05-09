@@ -12,7 +12,7 @@ export class ViewApp {
 
   render(arrButton, setBtn, setCodeBtn, isLang, isCaps) {
     const wrapper = new Control(this.root, 'div', 'wrapper');
-    const title = new Control(wrapper.node, 'h1', 'title_key', isLang ? TITLE_CONTENT_RU : TITLE_CONTENT_EN);
+    const title = new Control(wrapper.node, 'h1', 'title', isLang ? TITLE_CONTENT_RU : TITLE_CONTENT_EN);
     this.title = title.node;
     const container = new Control(wrapper.node, 'div', 'container');
     const monitorWrap = new Control(container.node, 'div', 'wrapper__monitor');

@@ -5,16 +5,17 @@
 
 body {
   background: rgba(170, 186, 181, 0.9215686275);
+  display: flex;
 }
 
 .wrapper {
-  margin: 0 auto;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  padding-top: 20px;
+  padding: 20px 10px;
 }
 
 .container {
@@ -23,6 +24,10 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+}
+
+.title {
+  text-align: center;
 }
 
 .wrapper__monitor {
@@ -36,7 +41,8 @@ body {
   box-shadow: inset rgba(148, 37, 24, 0.92) -7px 5px 17px, inset rgb(131, 207, 215) 7px 0px 7px, rgba(6, 4, 4, 0.8) 0px 0px 4px 3px;
   border-radius: 20px;
 }
-.wrapper__monitor .monitor {
+
+.monitor {
   width: 530px;
   height: 180px;
   resize: none;
@@ -62,14 +68,16 @@ body {
   background: #80960a;
   box-shadow: inset rgba(148, 37, 24, 0.92) -360px 0px 15px, inset rgb(131, 207, 215) 280px 222px 14px, rgba(6, 4, 4, 0.8) 0px 0px 1px 5px;
 }
-.wrapper_keyboard .keyboard {
+
+.keyboard {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 7px;
   column-gap: 4px;
 }
-.wrapper_keyboard .keyboard .button {
+
+.button {
   width: 40px;
   height: 40px;
   border: solid 1px #000;
@@ -82,52 +90,52 @@ body {
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px #000;
 }
-.wrapper_keyboard .keyboard .button.active {
+.button.active {
   background-color: rgba(197, 201, 224, 0.1294117647);
   box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
   transition: all 0.2s linear 0s;
 }
-.wrapper_keyboard .keyboard .button:hover {
+.button:hover {
   background: rgba(197, 201, 224, 0.1294117647);
 }
-.wrapper_keyboard .keyboard .button:active {
+.button:active {
   background-color: rgba(197, 201, 224, 0.1294117647);
   box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
   transition: all 0.2s linear 0s;
 }
-.wrapper_keyboard .keyboard .button_backspace {
+.button_backspace {
   width: 100px;
   font-weight: 700;
 }
-.wrapper_keyboard .keyboard .button_tab {
+.button_tab {
   width: 50px;
   font-weight: 700;
 }
-.wrapper_keyboard .keyboard .button_delete {
+.button_delete {
   width: 44px;
   font-weight: 700;
 }
-.wrapper_keyboard .keyboard .button_capsLock {
+.button_capsLock {
   width: 86px;
   font-weight: 700;
 }
-.wrapper_keyboard .keyboard .button_enter {
+.button_enter {
   width: 86px;
   font-weight: 700;
 }
-.wrapper_keyboard .keyboard .button_shift {
+.button_shift {
   width: 84px;
   padding: 7px;
   font-weight: 700;
   padding-top: 5px;
 }
-.wrapper_keyboard .keyboard .button_space {
+.button_space {
   width: 330px;
 }
-.wrapper_keyboard .keyboard .button_bold {
+.button_bold {
   font-weight: 700;
 }
-.wrapper_keyboard .keyboard .button_arrow {
+.button_arrow {
   color: #000;
   font-weight: 700;
   font-size: 18px;
