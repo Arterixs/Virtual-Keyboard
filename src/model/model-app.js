@@ -1,11 +1,13 @@
+import { setStateStorageCaps, getStateStorageLang, setStateStorageLang, getStateStorageCaps } from '../utils/helpers.js';
+
 export class ModelApp {
   constructor(dataBtn) {
     this.collectionCodeBtn = new Map();
     this.keysLang = new Set();
     this.arrayBtn = [];
     this.dataButtons = dataBtn;
-    this.langEn = false;
-    this.capsFlag = false;
+    this.langEn = JSON.parse(getStateStorageLang());
+    this.capsFlag = JSON.parse(getStateStorageCaps());
   }
 
   setKeysLang(key) {
@@ -26,6 +28,7 @@ export class ModelApp {
 
   swiftLang() {
     this.langEn = !this.langEn;
+    setStateStorageLang(this.langEn);
   }
 
   getCapsFlag() {
@@ -34,6 +37,7 @@ export class ModelApp {
 
   swiftCapsFlag() {
     this.capsFlag = !this.capsFlag;
+    setStateStorageCaps(this.capsFlag);
   }
 
   setArrayBtn(button) {

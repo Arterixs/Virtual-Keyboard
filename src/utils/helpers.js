@@ -71,3 +71,12 @@ export const changeShiftTextContent = (button, isShift, isCaps) => {
     button.textContent = isCaps ? button.textContent.toUpperCase() : button.textContent.toLowerCase();
   }
 };
+
+export const getStateStorageCaps = () => localStorage.getItem('capsLockState') || false;
+export const getStateStorageLang = () => localStorage.getItem('languageState') || false;
+export const setStateStorageCaps = (state) => {
+  localStorage.setItem('capsLockState', state);
+};
+export const setStateStorageLang = (state) => {
+  localStorage.setItem('languageState', state);
+};

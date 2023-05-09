@@ -5,11 +5,20 @@ import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps, changeShift
 export class ControllerApp {
   constructor(root, dataBtn) {
     this.model = new ModelApp(dataBtn);
-    this.view = new ViewApp(root, this.model.getButtonsArray(), this.setBtn.bind(this), this.setCodeBtn.bind(this));
-    this.setListener();
+    const isLang = this.model.getLang();
+    const isCaps = this.model.getCapsFlag();
+    this.view = new ViewApp(
+      root,
+      this.model.getButtonsArray(),
+      this.setBtn.bind(this),
+      this.setCodeBtn.bind(this),
+      isLang,
+      isCaps
+    );
+    this.hangListeners();
   }
 
-  setListener() {
+  hangListeners() {
     const { dataButtons, arrayBtn } = this.model;
     arrayBtn.forEach((button, indx) => {
       const { code } = dataButtons[indx];
