@@ -1,6 +1,7 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
 import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps, changeShiftTextContent } from '../utils/helpers.js';
+import { ENTER_CONTENT, SPACE_CONTENT, TAB_CONTENT } from '../utils/constants/content.js';
 import {
   ENTER,
   TAB,
@@ -100,10 +101,10 @@ export class ControllerApp {
     switch (code) {
       case TAB:
         if (button) {
-          button.onclick = () => this.controlerInputKey(code, '    ');
+          button.onclick = () => this.controlerInputKey(code, TAB_CONTENT);
           break;
         }
-        this.controlerInputKey(code, '    ');
+        this.controlerInputKey(code, TAB_CONTENT);
         break;
       case CAPS_LOCK:
         if (button) {
@@ -142,10 +143,10 @@ export class ControllerApp {
         break;
       case SPACE:
         if (button) {
-          button.onclick = () => this.controlerInputKey(code, ' ');
+          button.onclick = () => this.controlerInputKey(code, SPACE_CONTENT);
           break;
         }
-        this.controlerInputKey(code, ' ');
+        this.controlerInputKey(code, SPACE_CONTENT);
         break;
       case ARROW_LEFT:
         if (button) {
@@ -177,10 +178,10 @@ export class ControllerApp {
         break;
       case ENTER:
         if (button) {
-          button.onclick = () => this.controlerInputKey(code, '\n');
+          button.onclick = () => this.controlerInputKey(code, ENTER_CONTENT);
           break;
         }
-        this.controlerInputKey(code, '\n');
+        this.controlerInputKey(code, ENTER_CONTENT);
         break;
       case BACKSPACE:
         if (button) {
