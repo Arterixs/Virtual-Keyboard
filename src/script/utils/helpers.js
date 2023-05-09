@@ -1,3 +1,4 @@
+import { ONE_SYMBOL } from './constants/magic-numbers.js';
 import {
   ENTER,
   TAB,
@@ -22,8 +23,8 @@ export const getNewString = (positionCaret, oldText, newText, code) => {
   const isKeyBackspace = code === BACKSPACE;
   if (!positionCaret && isKeyBackspace) return oldText;
   const isKeyDelete = code === DELETE;
-  const endOfLine = isKeyBackspace ? positionCaret - 1 : positionCaret;
-  const startOfLine = isKeyDelete ? positionCaret + 1 : positionCaret;
+  const endOfLine = isKeyBackspace ? positionCaret - ONE_SYMBOL : positionCaret;
+  const startOfLine = isKeyDelete ? positionCaret + ONE_SYMBOL : positionCaret;
   const oneHalfString = oldText.slice(0, endOfLine);
   const twoHalfString = oldText.slice(startOfLine);
   const newString =
@@ -33,7 +34,7 @@ export const getNewString = (positionCaret, oldText, newText, code) => {
 
 export const getNewPositionCaret = (code, position, content) => {
   if (code === ENTER) return position + 1;
-  if (code === BACKSPACE) return position ? position - 1 : position;
+  if (code === BACKSPACE) return position ? position - ONE_SYMBOL : position;
   if (code === DELETE) return position;
   return position + content.length;
 };

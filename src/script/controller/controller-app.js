@@ -2,6 +2,7 @@ import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
 import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps, changeShiftTextContent } from '../utils/helpers.js';
 import { ENTER_CONTENT, SPACE_CONTENT, TAB_CONTENT, TITLE_CONTENT_RU, TITLE_CONTENT_EN } from '../utils/constants/content.js';
+import { TWO_KEYS_PRESS } from '../utils/constants/magic-numbers.js';
 import {
   ENTER,
   TAB,
@@ -86,7 +87,7 @@ export class ControllerApp {
 
   checkKeysLang() {
     const amountKeysPress = this.model.getSizeKeysLang();
-    if (amountKeysPress === 2) {
+    if (amountKeysPress === TWO_KEYS_PRESS) {
       this.model.swiftLang();
       this.changeLanguage();
     }
