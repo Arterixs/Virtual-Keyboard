@@ -13,6 +13,8 @@
   "rules": {
     "import/prefer-default-export": ["off", { "target": "single" }],
     "import/extensions": [2, { "js": "always" }],
-    "no-unused-vars": ["error", { "varsIgnorePattern": "[iI]gnore" }]
+    "no-unused-vars": ["error", { "varsIgnorePattern": "[iI]gnore" }],
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["button"] }],
+    "no-sequences": "off"
   }
 }

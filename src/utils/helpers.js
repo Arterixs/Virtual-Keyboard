@@ -65,10 +65,9 @@ export const checkKeysCaps = (code) => {
 };
 
 export const changeShiftTextContent = (button, isShift, isCaps) => {
-  const copyButton = button;
   if (isShift) {
-    copyButton.textContent = isCaps ? copyButton.textContent.toLowerCase() : copyButton.textContent.toUpperCase();
+    button.textContent = isCaps ? button.textContent.toLowerCase() : button.textContent.toUpperCase();
   } else {
-    copyButton.textContent = isCaps ? copyButton.textContent.toUpperCase() : copyButton.textContent.toLowerCase();
+    button.textContent = isCaps ? button.textContent.toUpperCase() : button.textContent.toLowerCase();
   }
 };
