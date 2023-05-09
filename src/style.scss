@@ -1,10 +1,12 @@
+@import './styles/variables.scss';
+
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
 body {
-  background: #aabab5eb;
+  background: $background_body;
 }
 
 .wrapper {
@@ -25,29 +27,30 @@ body {
   gap: 20px;
 }
 
-.wrapper_monitor {
+.wrapper__monitor {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 580px;
   height: 230px;
-  border: solid 1px #000;
-  background: linear-gradient(189deg, rgb(53 148 210), rgb(165 39 28));
-  box-shadow: inset rgb(148 37 24 / 92%) -7px 5px 17px, inset rgb(131 207 215) 7px 0px 7px, rgb(6 4 4 / 80%) 0px 0px 4px 3px;
+  border: solid 1px $border_color;
+  background: linear-gradient(189deg, $keyboard_backg_gradient_one, $keyboard_backg_gradient_two);
+  box-shadow: inset $keyboard_shadow_gradient_one -7px 5px 17px, inset $keyboard_shadow_gradient_two 7px 0px 7px,
+    $keyboard_shadow_gradient_three 0px 0px 4px 3px;
   border-radius: 20px;
   .monitor {
     width: 530px;
     height: 180px;
     resize: none;
-    background: #000;
-    caret-color: green;
-    color: green;
+    background: $background_monitor;
+    caret-color: $monitor_color;
+    color: $monitor_color;
     font-size: 22px;
     outline: none;
     -moz-appearance: none;
     padding: 10px;
     border-radius: 12px;
-    box-shadow: 0px 0px 0px 10px #404040;
+    box-shadow: 0px 0px 0px 10px $shadow_color_monitor;
   }
 }
 
@@ -60,9 +63,9 @@ body {
   border-radius: 5px;
   padding: 10px;
   background: #80960a;
-  box-shadow: inset rgb(148 37 24 / 92%) -360px 0px 15px, inset rgb(131 207 215) 280px 222px 14px,
-    rgb(6 4 4 / 80%) 0px 0px 1px 5px;
-  .line {
+  box-shadow: inset $keyboard_shadow_gradient_one -360px 0px 15px, inset $keyboard_shadow_gradient_two 280px 222px 14px,
+    $keyboard_shadow_gradient_three 0px 0px 1px 5px;
+  .keyboard {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -71,26 +74,26 @@ body {
     .button {
       width: 40px;
       height: 40px;
-      border: solid 1px #000;
+      border: solid 1px $border_color;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 10px;
       cursor: pointer;
-      background: #cccccc;
+      background: $background_button;
       border-radius: 5px;
-      box-shadow: 2px 2px 2px 1px #000;
+      box-shadow: 2px 2px 2px 1px $border_color;
       &.active {
-        background-color: #c5c9e021;
-        box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
+        background-color: $background_button_active;
+        box-shadow: 0 0px 0 $shadow_color_button_active inset, 0 0px 0;
         transition: all 0.2s linear 0s;
       }
       &:hover {
-        background: #c5c9e021;
+        background: $background_button_hover;
       }
       &:active {
-        background-color: #c5c9e021;
-        box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
+        background-color: $background_button_active;
+        box-shadow: 0 0px 0 $shadow_color_button_active inset, 0 0px 0;
         transition: all 0.2s linear 0s;
       }
       &_backspace {
@@ -126,7 +129,7 @@ body {
         font-weight: 700;
       }
       &_arrow {
-        color: #000;
+        color: $arrow_color;
         font-weight: 700;
         font-size: 18px;
       }

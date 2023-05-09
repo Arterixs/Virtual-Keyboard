@@ -15,16 +15,16 @@ export class ViewApp {
     const title = new Control(wrapper.node, 'h1', 'title_key', isLang ? TITLE_CONTENT_RU : TITLE_CONTENT_EN);
     this.title = title.node;
     const container = new Control(wrapper.node, 'div', 'container');
-    const monitorWrap = new Control(container.node, 'div', 'wrapper_monitor');
+    const monitorWrap = new Control(container.node, 'div', 'wrapper__monitor');
     const monitor = new Control(monitorWrap.node, 'textarea', 'monitor');
     this.textarea = monitor.node;
     const keyboardWrap = new Control(container.node, 'div', 'wrapper_keyboard');
-    const line = new Control(keyboardWrap.node, 'div', 'line');
+    const keyboard = new Control(keyboardWrap.node, 'div', 'keyboard');
     for (let i = 0; i < arrButton.length; i += 1) {
       const getLangContent = isLang ? arrButton[i].keyRu : arrButton[i].keyEng;
       const getContentSize = isCaps ? getLangContent.toUpperCase() : getLangContent.toLowerCase();
       const getCheckContentSize = checkKeysCaps(arrButton[i].code) ? getContentSize : getLangContent;
-      const button = new Control(line.node, 'button', arrButton[i].className, getCheckContentSize);
+      const button = new Control(keyboard.node, 'button', arrButton[i].className, getCheckContentSize);
       setBtn(button.node);
       setCodeBtn(arrButton[i].code, i);
     }
