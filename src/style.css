@@ -16,6 +16,8 @@ body {
   justify-content: space-between;
   gap: 30px;
   padding: 20px 10px;
+  font-family: "Montserrat";
+  font-weight: 400;
 }
 
 .container {
@@ -28,6 +30,8 @@ body {
 
 .title {
   text-align: center;
+  font-weight: 700;
+  color: #332a1f;
 }
 
 .wrapper__monitor {
@@ -43,6 +47,8 @@ body {
 }
 
 .monitor {
+  font-family: "Montserrat";
+  font-weight: 500;
   width: 530px;
   height: 180px;
   resize: none;
@@ -78,6 +84,8 @@ body {
 }
 
 .button {
+  font-family: "Montserrat";
+  font-weight: 500;
   width: 40px;
   height: 40px;
   border: solid 1px #000;
@@ -89,19 +97,21 @@ body {
   background: #cccccc;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 1px #000;
+  transition: all 0.3s ease;
 }
 .button.active {
   background-color: rgba(197, 201, 224, 0.1294117647);
   box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
-  transition: all 0.2s linear 0s;
+  transition: all 0.3s ease;
 }
 .button:hover {
   background: rgba(197, 201, 224, 0.1294117647);
+  transition: all 0.3s ease;
 }
 .button:active {
   background-color: rgba(197, 201, 224, 0.1294117647);
   box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
-  transition: all 0.2s linear 0s;
+  transition: all 0.3s ease;
 }
 .button_backspace {
   width: 100px;
