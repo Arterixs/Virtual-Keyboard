@@ -2,7 +2,7 @@ import { arrButtonData } from './data/data-array-btn.js';
 import { ControllerApp } from './controller/controller-app.js';
 import { F12 } from './utils/constants/code-key.js';
 
-(function () {
+(function start() {
   const controller = new ControllerApp(document.body, arrButtonData);
   document.addEventListener('keydown', (e) => {
     if (e.code !== F12) {
