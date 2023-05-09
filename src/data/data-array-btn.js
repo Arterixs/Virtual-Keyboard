@@ -109,7 +109,7 @@ export const arrButtonData = [
     keyEng: 'Backspace',
     keyRu: 'Backspace',
     code: 'Backspace',
-    className: 'button backspace',
+    className: 'button button_backspace',
   },
   {
     keyShiftEN: 'Tab',
@@ -117,7 +117,7 @@ export const arrButtonData = [
     keyEng: 'Tab',
     keyRu: 'Tab',
     code: 'Tab',
-    className: 'button tab',
+    className: 'button button_tab',
   },
   {
     keyShiftEN: 'Q',
@@ -229,7 +229,7 @@ export const arrButtonData = [
     keyEng: 'Del',
     keyRu: 'Del',
     code: 'Delete',
-    className: 'button delete',
+    className: 'button button_delete',
   },
   {
     keyShiftEN: 'CapsLock',
@@ -237,7 +237,7 @@ export const arrButtonData = [
     keyEng: 'CapsLock',
     keyRu: 'CapsLock',
     code: 'CapsLock',
-    className: 'button capsLock',
+    className: 'button button_capsLock',
   },
   {
     keyShiftEN: 'A',
@@ -333,7 +333,7 @@ export const arrButtonData = [
     keyEng: 'Enter',
     keyRu: 'Enter',
     code: 'Enter',
-    className: 'button enter',
+    className: 'button button_enter',
   },
   {
     keyShiftEN: 'Shift',
@@ -341,7 +341,7 @@ export const arrButtonData = [
     keyEng: 'Shift',
     keyRu: 'Shift',
     code: 'ShiftLeft',
-    className: 'button shift',
+    className: 'button button_shift',
   },
   {
     keyShiftEN: 'Z',
@@ -429,7 +429,7 @@ export const arrButtonData = [
     keyEng: '⇧',
     keyRu: '⇧',
     code: 'ArrowUp',
-    className: 'button arrow',
+    className: 'button button_arrow',
   },
   {
     keyShiftEN: 'Shift',
@@ -437,7 +437,7 @@ export const arrButtonData = [
     keyEng: 'Shift',
     keyRu: 'Shift',
     code: 'ShiftRight',
-    className: 'button shift',
+    className: 'button button_shift',
   },
   {
     keyShiftEN: 'Ctrl',
@@ -445,7 +445,7 @@ export const arrButtonData = [
     keyEng: 'Ctrl',
     keyRu: 'Ctrl',
     code: 'ControlLeft',
-    className: 'button',
+    className: 'button button_bold',
   },
   {
     keyShiftEN: 'Win',
@@ -453,7 +453,7 @@ export const arrButtonData = [
     keyEng: 'Win',
     keyRu: 'Win',
     code: 'WakeUp',
-    className: 'button',
+    className: 'button button_bold',
   },
   {
     keyShiftEN: 'Alt',
@@ -461,7 +461,7 @@ export const arrButtonData = [
     keyEng: 'Alt',
     keyRu: 'Alt',
     code: 'AltLeft',
-    className: 'button',
+    className: 'button button_bold',
   },
   {
     keyShiftEN: '',
@@ -469,7 +469,7 @@ export const arrButtonData = [
     keyEng: ' ',
     keyRu: ' ',
     code: 'Space',
-    className: 'button space',
+    className: 'button button_space',
   },
   {
     keyShiftEN: 'Alt',
@@ -477,7 +477,7 @@ export const arrButtonData = [
     keyEng: 'Alt',
     keyRu: 'Alt',
     code: 'AltRight',
-    className: 'button',
+    className: 'button button_bold',
   },
   {
     keyShiftEN: '⇦',
@@ -485,7 +485,7 @@ export const arrButtonData = [
     keyEng: '⇦',
     keyRu: '⇦',
     code: 'ArrowLeft',
-    className: 'button arrow',
+    className: 'button button_arrow',
   },
   {
     keyShiftEN: '⇩',
@@ -493,7 +493,7 @@ export const arrButtonData = [
     keyEng: '⇩',
     keyRu: '⇩',
     code: 'ArrowDown',
-    className: 'button arrow',
+    className: 'button button_arrow',
   },
   {
     keyShiftEN: '⇨',
@@ -501,7 +501,7 @@ export const arrButtonData = [
     keyEng: '⇨',
     keyRu: '⇨',
     code: 'ArrowRight',
-    className: 'button arrow',
+    className: 'button button_arrow',
   },
   {
     keyShiftEN: 'Ctrl',
@@ -509,6 +509,6 @@ export const arrButtonData = [
     keyEng: 'Ctrl',
     keyRu: 'Ctrl',
     code: 'ControlRight',
-    className: 'button',
+    className: 'button button_bold',
   },
 ];

@@ -4,7 +4,7 @@
 }
 
 body {
-  background: #aabab5eb;
+  background: rgba(170, 186, 181, 0.9215686275);
 }
 
 .wrapper {
@@ -32,8 +32,8 @@ body {
   width: 580px;
   height: 230px;
   border: solid 1px #000;
-  background: linear-gradient(189deg, #3594d2, #a5271c);
-  box-shadow: inset rgba(148, 37, 24, 0.92) -7px 5px 17px, inset #83cfd7 7px 0px 7px, rgba(6, 4, 4, 0.8) 0px 0px 4px 3px;
+  background: linear-gradient(189deg, rgb(53, 148, 210), rgb(165, 39, 28));
+  box-shadow: inset rgba(148, 37, 24, 0.92) -7px 5px 17px, inset rgb(131, 207, 215) 7px 0px 7px, rgba(6, 4, 4, 0.8) 0px 0px 4px 3px;
   border-radius: 20px;
 }
 .wrapper_monitor .monitor {
@@ -60,7 +60,7 @@ body {
   border-radius: 5px;
   padding: 10px;
   background: #80960a;
-  box-shadow: inset rgba(148, 37, 24, 0.92) -360px 0px 15px, inset #83cfd7 280px 222px 14px, rgba(6, 4, 4, 0.8) 0px 0px 1px 5px;
+  box-shadow: inset rgba(148, 37, 24, 0.92) -360px 0px 15px, inset rgb(131, 207, 215) 280px 222px 14px, rgba(6, 4, 4, 0.8) 0px 0px 1px 5px;
 }
 .wrapper_keyboard .line {
   display: flex;
@@ -83,63 +83,51 @@ body {
   box-shadow: 2px 2px 2px 1px #000;
 }
 .wrapper_keyboard .line .button.active {
-  background-color: #c5c9e021;
+  background-color: rgba(197, 201, 224, 0.1294117647);
   box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
   transition: all 0.2s linear 0s;
 }
 .wrapper_keyboard .line .button:hover {
-  background: #c5c9e021;
+  background: rgba(197, 201, 224, 0.1294117647);
 }
 .wrapper_keyboard .line .button:active {
-  background-color: #c5c9e021;
+  background-color: rgba(197, 201, 224, 0.1294117647);
   box-shadow: 0 0px 0 #010101 inset, 0 0px 0;
   transition: all 0.2s linear 0s;
 }
-.wrapper_keyboard .line .backspace {
+.wrapper_keyboard .line .button_backspace {
   width: 100px;
-}
-.wrapper_keyboard .line .backspace p {
   font-weight: 700;
 }
-.wrapper_keyboard .line .tab {
+.wrapper_keyboard .line .button_tab {
   width: 50px;
-}
-.wrapper_keyboard .line .tab p {
   font-weight: 700;
 }
-.wrapper_keyboard .line .delete {
+.wrapper_keyboard .line .button_delete {
   width: 44px;
-}
-.wrapper_keyboard .line .delete p {
   font-weight: 700;
 }
-.wrapper_keyboard .line .capsLock {
+.wrapper_keyboard .line .button_capsLock {
   width: 86px;
-}
-.wrapper_keyboard .line .capsLock p {
   font-weight: 700;
 }
-.wrapper_keyboard .line .enter {
+.wrapper_keyboard .line .button_enter {
   width: 86px;
-}
-.wrapper_keyboard .line .enter p {
   font-weight: 700;
 }
-.wrapper_keyboard .line .shift {
+.wrapper_keyboard .line .button_shift {
   width: 84px;
   padding: 7px;
-}
-.wrapper_keyboard .line .shift p {
   font-weight: 700;
-  width: 100%;
-  height: 100%;
   padding-top: 5px;
 }
-.wrapper_keyboard .line .space {
+.wrapper_keyboard .line .button_space {
   width: 330px;
 }
-
-.arrow {
+.wrapper_keyboard .line .button_bold {
+  font-weight: 700;
+}
+.wrapper_keyboard .line .button_arrow {
   color: #000;
   font-weight: 700;
   font-size: 18px;
