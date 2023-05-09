@@ -1,0 +1,20 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "airbnb-base", "plugin:import/recommended", "prettier"],
+  "plugins": ["import", "prettier"],
+  "rules": {
+    "import/prefer-default-export": ["off", { "target": "single" }],
+    "import/extensions": [2, { "js": "always" }],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "[iI]gnore" }],
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["button"] }],
+    "no-sequences": "off"
+  }
+}

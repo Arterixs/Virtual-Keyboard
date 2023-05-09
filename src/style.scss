@@ -1,0 +1,156 @@
+@import './styles/variables.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  background: $background_body;
+  display: flex;
+}
+
+.wrapper {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 20px 10px;
+  font-family: 'Montserrat';
+  font-weight: 400;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.title {
+  text-align: center;
+  font-weight: 700;
+  color: $title_color;
+}
+
+.wrapper__monitor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 580px;
+  height: 230px;
+  border: solid 1px $border_color;
+  background: linear-gradient(189deg, $keyboard_backg_gradient_one, $keyboard_backg_gradient_two);
+  box-shadow: inset $keyboard_shadow_gradient_one -7px 5px 17px, inset $keyboard_shadow_gradient_two 7px 0px 7px,
+    $keyboard_shadow_gradient_three 0px 0px 4px 3px;
+  border-radius: 20px;
+}
+
+.monitor {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  width: 530px;
+  height: 180px;
+  resize: none;
+  background: $background_monitor;
+  caret-color: $monitor_color;
+  color: $monitor_color;
+  font-size: 22px;
+  outline: none;
+  -moz-appearance: none;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 0px 10px $shadow_color_monitor;
+}
+
+.wrapper_keyboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 704px;
+  height: 251px;
+  border-radius: 5px;
+  padding: 10px;
+  background: $background_wrap_keyboard;
+  box-shadow: inset $keyboard_shadow_gradient_one -360px 0px 15px, inset $keyboard_shadow_gradient_two 280px 222px 14px,
+    $keyboard_shadow_gradient_three 0px 0px 1px 5px;
+}
+
+.keyboard {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 7px;
+  column-gap: 4px;
+}
+
+.button {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  width: 40px;
+  height: 40px;
+  border: solid 1px $border_color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  background: $background_button;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 1px $border_color;
+  transition: all 0.3s ease;
+  &.active {
+    background-color: $background_button_active;
+    box-shadow: 0 0px 0 $shadow_color_button_active inset, 0 0px 0;
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    background: $background_button_hover;
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background-color: $background_button_active;
+    box-shadow: 0 0px 0 $shadow_color_button_active inset, 0 0px 0;
+    transition: all 0.3s ease;
+  }
+  &_backspace {
+    width: 100px;
+    font-weight: 700;
+  }
+  &_tab {
+    width: 50px;
+    font-weight: 700;
+  }
+  &_delete {
+    width: 44px;
+    font-weight: 700;
+  }
+  &_capsLock {
+    width: 86px;
+    font-weight: 700;
+  }
+  &_enter {
+    width: 86px;
+    font-weight: 700;
+  }
+  &_shift {
+    width: 84px;
+    padding: 7px;
+    font-weight: 700;
+    padding-top: 5px;
+  }
+  &_space {
+    width: 330px;
+  }
+  &_bold {
+    font-weight: 700;
+  }
+  &_arrow {
+    color: $arrow_color;
+    font-weight: 700;
+    font-size: 18px;
+  }
+}
