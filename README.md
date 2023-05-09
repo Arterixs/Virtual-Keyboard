@@ -26,7 +26,8 @@
 
 ![product-screenshot](https://user-images.githubusercontent.com/95077794/230789353-7e08d0e6-f61a-41ca-9a46-f13f0230f88f.png)
 
-My first "big" project. The application allows you to use the virtual keyboard to display characters on the screen..
+My first "big" project. The application allows you to use the virtual keyboard to display characters on the screen.
+The project was refactored, the old code is in the Keyboard branch, you can compare my progress.
 
 ### Built With
 
@@ -41,7 +42,15 @@ This section lists all the main tools with which this project was built.
 This section describes the functionality of the application.
 
 - [x] Mouse entry
-- [x] The functionality of most physical keyboard keys
+- [x] Tab key functionality implemented
+- [x] Shift key functionality implemented
+- [x] Enter key functionality implemented
+- [x] Space key functionality implemented
+- [x] Backspace key functionality implemented
+- [x] Delete key functionality implemented
+- [x] Arrow keys functionality implemented
+- [x] CapsLock key functionality implemented
+- [x] Implemented language switching: Russian and English
 
 ## Getting Started
 
@@ -53,7 +62,8 @@ This is an example of how you may give instructions on setting up your project l
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-2. Enjoy coding!
+2. Run project from Live Server
+3. Enjoy coding!
 
 ## View Project
 
