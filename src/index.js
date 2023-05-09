@@ -1,6 +1,6 @@
-import { arrButtonData } from './data/data-array-btn.js';
-import { ControllerApp } from './controller/controller-app.js';
-import { F12 } from './utils/constants/code-key.js';
+import { arrButtonData } from './script/data/data-array-btn.js';
+import { ControllerApp } from './script/controller/controller-app.js';
+import { F12 } from './script/utils/constants/code-key.js';
 
 (function start() {
   const controller = new ControllerApp(document.body, arrButtonData);
