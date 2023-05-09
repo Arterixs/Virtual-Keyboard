@@ -4,11 +4,15 @@ import { ControllerApp } from './controller/controller-app.js';
 (function () {
   const controller = new ControllerApp(document.body, arrButtonData);
   document.addEventListener('keydown', (e) => {
-    e.preventDefault();
+    if (e.code !== 'F12') {
+      e.preventDefault();
+    }
     controller.keyDown(e.code);
   });
   document.addEventListener('keyup', (e) => {
-    e.preventDefault();
+    if (e.code !== 'F12') {
+      e.preventDefault();
+    }
     controller.keyUp(e.code);
   });
 })();
