@@ -69,4 +69,4 @@ This is an example of how you may give instructions on setting up your project l
 
 This section contains a link to the application deployment.
 
-[Virtual Keyboard](https://arterixs.github.io/Virtual-Keyboard/Virtual%20KeyBord/index.html)
+[Virtual Keyboard](https://arterixs.github.io/Virtual-Keyboard/index.html)
