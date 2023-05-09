@@ -1,6 +1,25 @@
 import { ViewApp } from '../view/view-app.js';
 import { ModelApp } from '../model/model-app.js';
 import { getNewString, getNewPositionCaret, arrowApi, checkKeysCaps, changeShiftTextContent } from '../utils/helpers.js';
+import {
+  ENTER,
+  TAB,
+  CAPS_LOCK,
+  SHIFT_LEFT,
+  SHIFT_RIGHT,
+  ALT_LEFT,
+  SPACE,
+  ARROW_DOWN,
+  ARROW_RIGHT,
+  ARROW_LEFT,
+  ARROW_UP,
+  BACKSPACE,
+  DELETE,
+  CONTROL_LEFT,
+  CONTROL_RIGHT,
+  WIN,
+  ALT_RIGHT,
+} from '../utils/constants/code-key.js';
 
 export class ControllerApp {
   constructor(root, dataBtn) {
@@ -30,10 +49,10 @@ export class ControllerApp {
     if (this.model.checkKeyCode(code)) {
       const btn = this.getCurrentButton(code);
       btn.classList.remove('active');
-      if (code === 'ShiftLeft' || code === 'ShiftRight') {
+      if (code === SHIFT_LEFT || code === SHIFT_RIGHT) {
         this.logicShift(false);
       }
-      if (code === 'ShiftLeft' || code === 'AltLeft') {
+      if (code === SHIFT_LEFT || code === ALT_LEFT) {
         this.clearSet();
       }
     }
@@ -79,21 +98,21 @@ export class ControllerApp {
 
   checkKey(code, contentKey, button = null) {
     switch (code) {
-      case 'Tab':
+      case TAB:
         if (button) {
           button.onclick = () => this.controlerInputKey(code, '    ');
           break;
         }
         this.controlerInputKey(code, '    ');
         break;
-      case 'CapsLock':
+      case CAPS_LOCK:
         if (button) {
           button.onclick = () => this.logicCapsLock();
           break;
         }
         this.logicCapsLock();
         break;
-      case 'ShiftLeft':
+      case SHIFT_LEFT:
         if (button) {
           button.onmousedown = () => (this.logicShift(true), this.setKeyLang(code));
           button.onmouseup = () => (this.logicShift(false), this.clearSet());
@@ -103,7 +122,7 @@ export class ControllerApp {
         this.logicShift(true);
         this.setKeyLang(code);
         break;
-      case 'ShiftRight':
+      case SHIFT_RIGHT:
         if (button) {
           button.onmousedown = () => this.logicShift(true);
           button.onmouseup = () => this.logicShift(false);
@@ -112,7 +131,7 @@ export class ControllerApp {
         }
         this.logicShift(true);
         break;
-      case 'AltLeft':
+      case ALT_LEFT:
         if (button) {
           button.onmousedown = () => this.setKeyLang(code);
           button.onmouseup = () => this.clearSet();
@@ -121,66 +140,66 @@ export class ControllerApp {
         }
         this.setKeyLang(code);
         break;
-      case 'Space':
+      case SPACE:
         if (button) {
           button.onclick = () => this.controlerInputKey(code, ' ');
           break;
         }
         this.controlerInputKey(code, ' ');
         break;
-      case 'ArrowLeft':
+      case ARROW_LEFT:
         if (button) {
           button.onclick = () => arrowApi('left', 'character');
           break;
         }
         arrowApi('left', 'character');
         break;
-      case 'ArrowUp':
+      case ARROW_UP:
         if (button) {
           button.onclick = () => arrowApi('backward', 'line');
           break;
         }
         arrowApi('backward', 'line');
         break;
-      case 'ArrowRight':
+      case ARROW_RIGHT:
         if (button) {
           button.onclick = () => arrowApi('right', 'character');
           break;
         }
         arrowApi('right', 'character');
         break;
-      case 'ArrowDown':
+      case ARROW_DOWN:
         if (button) {
           button.onclick = () => arrowApi('forward', 'line');
           break;
         }
         arrowApi('forward', 'line');
         break;
-      case 'Enter':
+      case ENTER:
         if (button) {
           button.onclick = () => this.controlerInputKey(code, '\n');
           break;
         }
         this.controlerInputKey(code, '\n');
         break;
-      case 'Backspace':
+      case BACKSPACE:
         if (button) {
           button.onclick = () => this.controlerInputKey(code);
           break;
         }
         this.controlerInputKey(code);
         break;
-      case 'Delete':
+      case DELETE:
         if (button) {
           button.onclick = () => this.controlerInputKey(code);
           break;
         }
         this.controlerInputKey(code);
         break;
-      case 'ControlLeft':
-      case 'WakeUp':
-      case 'AltRight':
-      case 'ControlRight':
+      case CONTROL_LEFT:
+      case WIN:
+      case ALT_RIGHT:
+      case CONTROL_RIGHT:
         break;
       default:
         if (button) {

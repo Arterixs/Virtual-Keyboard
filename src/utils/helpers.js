@@ -1,7 +1,27 @@
+import {
+  ENTER,
+  TAB,
+  CAPS_LOCK,
+  SHIFT_LEFT,
+  SHIFT_RIGHT,
+  ALT_LEFT,
+  SPACE,
+  ARROW_DOWN,
+  ARROW_RIGHT,
+  ARROW_LEFT,
+  ARROW_UP,
+  BACKSPACE,
+  DELETE,
+  CONTROL_LEFT,
+  CONTROL_RIGHT,
+  WIN,
+  ALT_RIGHT,
+} from './constants/code-key.js';
+
 export const getNewString = (positionCaret, oldText, newText, code) => {
-  const isKeyBackspace = code === 'Backspace';
+  const isKeyBackspace = code === BACKSPACE;
   if (!positionCaret && isKeyBackspace) return oldText;
-  const isKeyDelete = code === 'Delete';
+  const isKeyDelete = code === DELETE;
   const endOfLine = isKeyBackspace ? positionCaret - 1 : positionCaret;
   const startOfLine = isKeyDelete ? positionCaret + 1 : positionCaret;
   const oneHalfString = oldText.slice(0, endOfLine);
@@ -12,9 +32,9 @@ export const getNewString = (positionCaret, oldText, newText, code) => {
 };
 
 export const getNewPositionCaret = (code, position, content) => {
-  if (code === 'Enter') return position + 1;
-  if (code === 'Backspace') return position ? position - 1 : position;
-  if (code === 'Delete') return position;
+  if (code === ENTER) return position + 1;
+  if (code === BACKSPACE) return position ? position - 1 : position;
+  if (code === DELETE) return position;
   return position + content.length;
 };
 
@@ -25,39 +45,23 @@ export const arrowApi = (direction, typeLine) => {
 
 export const checkKeysCaps = (code) => {
   switch (code) {
-    case 'Tab':
-      return false;
-    case 'CapsLock':
-      return false;
-    case 'ShiftLeft':
-      return false;
-    case 'ShiftRight':
-      return false;
-    case 'ControlLeft':
-      return false;
-    case 'WakeUp':
-      return false;
-    case 'AltLeft':
-      return false;
-    case 'Space':
-      return false;
-    case 'AltRight':
-      return false;
-    case 'ControlRight':
-      return false;
-    case 'ArrowLeft':
-      return false;
-    case 'ArrowUp':
-      return false;
-    case 'ArrowRight':
-      return false;
-    case 'ArrowDown':
-      return false;
-    case 'Enter':
-      return false;
-    case 'Backspace':
-      return false;
-    case 'Delete':
+    case TAB:
+    case CAPS_LOCK:
+    case SHIFT_LEFT:
+    case SHIFT_RIGHT:
+    case CONTROL_LEFT:
+    case WIN:
+    case ALT_LEFT:
+    case SPACE:
+    case ALT_RIGHT:
+    case CONTROL_RIGHT:
+    case ARROW_LEFT:
+    case ARROW_RIGHT:
+    case ARROW_DOWN:
+    case ARROW_UP:
+    case ENTER:
+    case BACKSPACE:
+    case DELETE:
       return false;
     default:
       return true;
